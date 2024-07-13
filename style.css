@@ -1,0 +1,42 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8ff;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+h1 {
+    color: #008080;
+    text-align: center;
+}
+
+.project {
+    background-color: #00CED1;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.project h2 {
+    margin-top: 0;
+}
+
+.project a {
+    color: #f0f8ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.project a:hover {
+    text-decoration: underline;
+}
