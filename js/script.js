@@ -2,14 +2,23 @@ const portfolioData = {
     description: "I'm a passionate developer interested in creating innovative solutions.",
     projects: [
         {
-            name: "Project 1",
-            description: "A web application for task management",
-            link: "https://github.com/username/project1"
+            name: "Floating Point Arithmetic Tool",
+            description: `When working with binary signals, debugging of datapath components often comes down to
+             hand calculations. This small programm was made to help with quick conversion of variable width floating point 
+             numbers.`,
+            link: "https://jsh4w.github.io/",
+            github: "https://github.com/JSh4w/JSh4w.github.io"
         },
         {
-            name: "Project 2",
-            description: "An AI-powered chatbot for customer service",
-            link: "https://github.com/username/project2"
+            name: "Python tool for hunting rental properties in London",
+            description: `Leveraging goole API's and webscraping to extract useful information and process 
+            tenant relevant data such as time to work in the morning. Data is then pushed to a google sheet.`,
+            github: "https://github.com/JSh4w/House_hunter"
+        },
+        {
+            name: "Stock analysis MERN application",
+            description: `Simply collection and analysis of time series stock data via a web application`,
+            github: "https://github.com/JSh4w/stock_analyser"
         }
     ]
 };
@@ -23,9 +32,18 @@ function renderPortfolio() {
         const projectDiv = document.createElement('div');
         projectDiv.className = 'project';
         projectDiv.innerHTML = `
-            <h2>${project.name}</h2>
-            <p>${project.description}</p>
-            <a href="${project.link}" target="_blank">View on GitHub</a>
+            if (${project.name}!=null){ 
+               <h2>${project.name}</h2>
+            }
+            if ($r{project.description}!=null){
+                <p>${project.description}</p>
+            }
+            if (${project.link}!=null){
+                <a href="${project.link}" target="_blank">Link to project / more information</a>
+            }
+            if (${project.github}!=null){
+                <a href="${project.github}" target="_blank">View on GitHub</a>
+            }
         `;
         projectsElement.appendChild(projectDiv);
     });
