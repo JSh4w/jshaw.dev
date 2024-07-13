@@ -31,20 +31,26 @@ function renderPortfolio() {
     portfolioData.projects.forEach(project => {
         const projectDiv = document.createElement('div');
         projectDiv.className = 'project';
-        projectDiv.innerHTML = `
-            if (${project.name}!=null){ 
-               <h2>${project.name}</h2>
-            }
-            if ($r{project.description}!=null){
-                <p>${project.description}</p>
-            }
-            if (${project.link}!=null){
-                <a href="${project.link}" target="_blank">Link to project / more information</a>
-            }
-            if (${project.github}!=null){
-                <a href="${project.github}" target="_blank">View on GitHub</a>
-            }
-        `;
+        
+        let projectHTML = '';
+        
+        if (project.name) {
+            projectHTML += `<h2>${project.name}</h2>`;
+        }
+        
+        if (project.description) {
+            projectHTML += `<p>${project.description}</p>`;
+        }
+        
+        if (project.link) {
+            projectHTML += `<a href="${project.link}" target="_blank">Link to project / more information</a>`;
+        }
+        
+        if (project.github) {
+            projectHTML += `<a href="${project.github}" target="_blank">View on GitHub</a>`;
+        }
+        
+        projectDiv.innerHTML = projectHTML;
         projectsElement.appendChild(projectDiv);
     });
 }
