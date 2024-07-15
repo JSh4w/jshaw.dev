@@ -1,5 +1,5 @@
 const portfolioData = {
-    description: "I'm a passionate developer interested in creating innovative solutions.",
+    description: "A recent graduate in Computer Engineering I have a love for all things software, hardware, tech and business. I'm eager to excel in all domains whether its GPU design, SWE in finance or tech consulting.",
     projects: [
         {
             name: "Floating Point Arithmetic Tool",
@@ -19,7 +19,12 @@ const portfolioData = {
             name: "Stock analysis MERN application",
             description: `Simply collection and analysis of time series stock data via a web application`,
             github: "https://github.com/JSh4w/stock_analyser"
-        }
+        },
+        {
+            name: "System Identification and Model-Based Reinforcement Learning for Control of a Soft Robotic Manipulator",
+            description: "4th Year project developing machine learning and neural networks to control a soft pendulum",
+            detailPage: "project_pages/4m25.html"
+        }        
     ]
 };
 
@@ -44,10 +49,16 @@ function renderPortfolio() {
         
         if (project.link) {
             projectHTML += `<a href="${project.link}" target="_blank">Link to project / more information</a>`;
+            projectHTML += `<br/>`;
         }
         
         if (project.github) {
             projectHTML += `<a href="${project.github}" target="_blank">View on GitHub</a>`;
+            projectHTML += `<br/>`;
+        }
+        
+        if (project.description) {
+            projectHTML += `<a href="${project.detailPage}" target="_blank">View detailed documentation here</a>`;
         }
         
         projectDiv.innerHTML = projectHTML;
