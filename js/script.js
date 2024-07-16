@@ -57,7 +57,7 @@ function renderPortfolio() {
             projectHTML += `<br/>`;
         }
         
-        if (project.description) {
+        if (project.detailPage) {
             projectHTML += `<a href="${project.detailPage}">View detailed documentation here</a>`;
         }
         
