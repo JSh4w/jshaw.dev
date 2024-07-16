@@ -58,7 +58,7 @@ function renderPortfolio() {
         }
         
         if (project.description) {
-            projectHTML += `<a href="${project.detailPage}" target="_blank">View detailed documentation here</a>`;
+            projectHTML += `<a href="${project.detailPage}">View detailed documentation here</a>`;
         }
         
         projectDiv.innerHTML = projectHTML;
