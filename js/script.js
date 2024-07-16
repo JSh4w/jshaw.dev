@@ -48,7 +48,7 @@ function renderPortfolio() {
         }
         
         if (project.link) {
-            projectHTML += `<a href="${project.link}" target="_blank">Link to project / more information</a>`;
+            projectHTML += `<a href="${project.link}" target="_blank">Link to project</a>`;
             projectHTML += `<br/>`;
         }
         
