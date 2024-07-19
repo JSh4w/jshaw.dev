@@ -45,3 +45,9 @@ h1 {
     max-width: 150px;
     border-radius: 50%;
 }
+
+.project-photo {
+    max-width: 150px;
+    border-radius: 50%;
+    height: auto;
+}

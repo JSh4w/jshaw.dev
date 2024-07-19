@@ -7,7 +7,8 @@ const portfolioData = {
              hand calculations. This small programm was made to help with quick conversion of variable width floating point 
              numbers.`,
             link: "https://jsh4w.github.io/",
-            github: "https://github.com/JSh4w/JSh4w.github.io"
+            github: "https://github.com/JSh4w/JSh4w.github.io",
+            image: "assets/float_point_arithmetic_tool.png"
         },
         {
             name: "Python tool for hunting rental properties in London",
@@ -18,7 +19,8 @@ const portfolioData = {
         {
             name: "Stock analysis MERN application",
             description: `Simply collection and analysis of time series stock data via a web application`,
-            github: "https://github.com/JSh4w/stock_analyser"
+            github: "https://github.com/JSh4w/stock_analyser",
+            image: "assets/stock_analysis.png"
         },
         {
             name: "System Identification and Model-Based Reinforcement Learning for Control of a Soft Robotic Manipulator",
@@ -59,7 +61,7 @@ function addImageElement(parent, src, alt, className) {
 
 function renderPortfolio() {
     const descriptionElement = document.getElementById('description');
-    addTextElement(descriptionElement, 'h1', portfolioData.description);
+    addTextElement(descriptionElement, 'p', portfolioData.description);
 
     const projectsElement = document.getElementById('projects');
 
