@@ -42,12 +42,13 @@ h1 {
 }
 
 .title-photo {
-    max-width: 150px;
+    max-width: 100px;
     border-radius: 50%;
+    height: auto;
 }
 
-.project-photo {
-    max-width: 150px;
+.project-image {
+    width: 100px;
     border-radius: 50%;
     height: auto;
 }
