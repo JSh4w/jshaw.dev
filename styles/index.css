@@ -40,3 +40,8 @@ h1 {
 .project a:hover {
     text-decoration: underline;
 }
+
+.title-photo {
+    max-width: 150px;
+    border-radius: 50%;
+}

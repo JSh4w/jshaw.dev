@@ -28,42 +28,56 @@ const portfolioData = {
     ]
 };
 
+function addTextElement(parent, tag, text) {
+    if (text) {
+        const element = document.createElement(tag);
+        element.textContent = text;
+        parent.appendChild(element);
+    }
+}
+
+function addLinkElement(parent, href, text) {
+    if (href) {
+        const link = document.createElement('a');
+        link.href = href;
+        link.target = "_blank";
+        link.textContent = text;
+        parent.appendChild(link);
+        parent.appendChild(document.createElement('br'));
+    }
+}
+
+function addImageElement(parent, src, alt, className) {
+    if (src) {
+        const img = document.createElement('img');
+        img.src = src;
+        img.alt = alt;
+        img.className = className;
+        parent.appendChild(img);
+    }
+}
+
 function renderPortfolio() {
     const descriptionElement = document.getElementById('description');
-    descriptionElement.textContent = portfolioData.description;
+    addTextElement(descriptionElement, 'h1', portfolioData.description);
 
     const projectsElement = document.getElementById('projects');
+
+    addImageElement(projectsElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
+
     portfolioData.projects.forEach(project => {
         const projectDiv = document.createElement('div');
         projectDiv.className = 'project';
         
-        let projectHTML = '';
-        
-        if (project.name) {
-            projectHTML += `<h2>${project.name}</h2>`;
-        }
-        
-        if (project.description) {
-            projectHTML += `<p>${project.description}</p>`;
-        }
-        
-        if (project.link) {
-            projectHTML += `<a href="${project.link}" target="_blank">Link to project</a>`;
-            projectHTML += `<br/>`;
-        }
-        
-        if (project.github) {
-            projectHTML += `<a href="${project.github}" target="_blank">View on GitHub</a>`;
-            projectHTML += `<br/>`;
-        }
-        
-        if (project.detailPage) {
-            projectHTML += `<a href="${project.detailPage}">View detailed documentation here</a>`;
-        }
-        
-        projectDiv.innerHTML = projectHTML;
+        addTextElement(projectDiv, 'h2', project.name);
+        addTextElement(projectDiv, 'p', project.description);
+        addLinkElement(projectDiv, project.link, 'Link to project');
+        addLinkElement(projectDiv, project.github, 'View on GitHub');
+        addLinkElement(projectDiv, project.detailPage, 'View detailed documentation here');
+        addImageElement(projectDiv, project.image, `${project.name} image`, 'project-image');
+
         projectsElement.appendChild(projectDiv);
     });
 }
 
-document.addEventListener('DOMContentLoaded', renderPortfolio);
+document.addEventListener('DOMContentLoaded', renderPortfolio);     
