@@ -48,7 +48,7 @@ h1 {
 }
 
 .project-image {
-    width: 100px;
-    border-radius: 50%;
+    width: 200px;
+    border-radius: 10%;
     height: auto;
 }
