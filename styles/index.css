@@ -41,14 +41,30 @@ h1 {
     text-decoration: underline;
 }
 
-.title-photo {
-    max-width: 100px;
-    border-radius: 50%;
-    height: auto;
-}
-
 .project-image {
     width: 200px;
     border-radius: 10%;
     height: auto;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+#heading {
+    flex: 1;
+}
+
+#title-photo {
+    flex: 0 0 auto;
+    margin-left: 20px;
+}
+
+.title-photo {
+    max-width: 150px;
+    height: auto;
+    border-radius: 50%;
 }

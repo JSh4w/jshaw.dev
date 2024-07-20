@@ -1,4 +1,5 @@
 const portfolioData = {
+    heading: "Jonathan Shaw - Portfolio",
     description: "A recent graduate in Computer Engineering I have a love for all things software, hardware, tech and business. I'm eager to excel in all domains whether its GPU design, SWE in finance or tech consulting.",
     titlePhoto: "assets/headshot.png",
     projects: [
@@ -61,13 +62,24 @@ function addImageElement(parent, src, alt, className) {
 }
 
 function renderPortfolio() {
+    const headerElement = document.getElementById('header');
+    const headingElement = document.createElement('div');
+    headingElement.id = 'heading';
+    const titlePhotoElement = document.createElement('div');
+    titlePhotoElement.id = 'title-photo';
+
+    headerElement.appendChild(headingElement);
+    headerElement.appendChild(titlePhotoElement);
+
+    addTextElement(headingElement, 'h1', portfolioData.heading);
+    addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
+
     const descriptionElement = document.getElementById('description');
     addTextElement(descriptionElement, 'p', portfolioData.description);
 
+    // Add projects
+
     const projectsElement = document.getElementById('projects');
-
-    addImageElement(projectsElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
-
     portfolioData.projects.forEach(project => {
         const projectDiv = document.createElement('div');
         projectDiv.className = 'project';
