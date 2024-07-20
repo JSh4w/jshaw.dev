@@ -63,33 +63,54 @@ function addImageElement(parent, src, alt, className) {
 
 function renderPortfolio() {
     const headerElement = document.getElementById('header');
+    
+    const headerContent = document.createElement('div');
+    headerContent.id = 'header-content';
+    
     const headingElement = document.createElement('div');
     headingElement.id = 'heading';
+    
+    const descriptionElement = document.createElement('div');
+    descriptionElement.id = 'description';
+    
     const titlePhotoElement = document.createElement('div');
     titlePhotoElement.id = 'title-photo';
 
-    headerElement.appendChild(headingElement);
+    headerContent.appendChild(headingElement);
+    headerContent.appendChild(descriptionElement);
+    headerElement.appendChild(headerContent);
     headerElement.appendChild(titlePhotoElement);
 
     addTextElement(headingElement, 'h1', portfolioData.heading);
+    addTextElement(descriptionElement, 'p', portfolioData.description);
     addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
 
-    const descriptionElement = document.getElementById('description');
-    addTextElement(descriptionElement, 'p', portfolioData.description);
 
     // Add projects
 
     const projectsElement = document.getElementById('projects');
+
     portfolioData.projects.forEach(project => {
         const projectDiv = document.createElement('div');
         projectDiv.className = 'project';
         
-        addTextElement(projectDiv, 'h2', project.name);
-        addTextElement(projectDiv, 'p', project.description);
-        addLinkElement(projectDiv, project.link, 'Link to project');
-        addLinkElement(projectDiv, project.github, 'View on GitHub');
-        addLinkElement(projectDiv, project.detailPage, 'View detailed documentation here');
-        addImageElement(projectDiv, project.image, `${project.name} image`, 'project-image');
+        const projectContent = document.createElement('div');
+        projectContent.className = 'project-content';
+        
+        addTextElement(projectContent, 'h2', project.name);
+        addTextElement(projectContent, 'p', project.description);
+        addLinkElement(projectContent, project.link, 'Link to project');
+        addLinkElement(projectContent, project.github, 'View on GitHub');
+        addLinkElement(projectContent, project.detailPage, 'View detailed documentation here');
+        
+        projectDiv.appendChild(projectContent);
+
+        if (project.image) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'project-image-container';
+            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image');
+            projectDiv.appendChild(imageContainer);
+        }
 
         projectsElement.appendChild(projectDiv);
     });

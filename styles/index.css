@@ -25,6 +25,24 @@ h1 {
     padding: 20px;
     border-radius: 5px;
     color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.project-content {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.project-image-container {
+    flex: 0 0 200px;
+}
+
+.project-image {
+    width: 100%;
+    border-radius: 10%;
+    height: auto;
 }
 
 .project h2 {
@@ -41,21 +59,28 @@ h1 {
     text-decoration: underline;
 }
 
-.project-image {
-    width: 200px;
-    border-radius: 10%;
-    height: auto;
-}
+
+
 
 #header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
     margin-bottom: 20px;
 }
 
-#heading {
+#header-content {
     flex: 1;
+}
+
+#heading h1 {
+    color: #055c5c;
+    text-align: left;
+    margin-bottom: 10px;
+}
+
+#description {
+    margin-bottom: 20px;
 }
 
 #title-photo {
