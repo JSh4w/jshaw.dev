@@ -1,6 +1,7 @@
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
-    description: "A recent graduate in Computer Engineering I have a love for all things software, hardware, tech and business. I'm eager to excel in all domains whether its GPU design, SWE in finance or tech consulting.",
+    description: `Hello, I am a computer engineer with experience in datapath, and an interest in the HW/ SW divide.
+    Here is my portfolio `,
     titlePhoto: "assets/headshot.png",
     projects: [
         {
