@@ -94,6 +94,13 @@ function renderPortfolio() {
         const projectDiv = document.createElement('div');
         projectDiv.className = 'project';
         
+        if (project.image) {
+            const imageContainer = document.createElement('div');
+            imageContainer.className = 'project-image-container';
+            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image');
+            projectDiv.appendChild(imageContainer);
+        }
+
         const projectContent = document.createElement('div');
         projectContent.className = 'project-content';
         
@@ -105,15 +112,9 @@ function renderPortfolio() {
         
         projectDiv.appendChild(projectContent);
 
-        if (project.image) {
-            const imageContainer = document.createElement('div');
-            imageContainer.className = 'project-image-container';
-            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image');
-            projectDiv.appendChild(imageContainer);
-        }
-
         projectsElement.appendChild(projectDiv);
     });
+    
 }
 
 document.addEventListener('DOMContentLoaded', renderPortfolio);     
