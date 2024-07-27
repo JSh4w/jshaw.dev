@@ -1,7 +1,8 @@
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
-    description: `Hello, I am a computer engineer with experience in datapath, and an interest in the HW/ SW divide.
-    Here is my portfolio `,
+    description: `Hello, I am a computer engineer with experience in semiconductor design and an interest in the HW/ SW divide.
+    Here is my portfolio. Feel free to look at my`,
+    cv: "assets/CV_Jonathan_Shaw.pdf",
     titlePhoto: "assets/headshot.png",
     projects: [
         {
@@ -84,10 +85,8 @@ function renderPortfolio() {
 
     addTextElement(headingElement, 'h1', portfolioData.heading);
     addTextElement(descriptionElement, 'p', portfolioData.description);
+    addLinkElement(descriptionElement, portfolioData.cv, 'resume');
     addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
-
-
-    // Add projects
 
     const projectsElement = document.getElementById('projects');
 
