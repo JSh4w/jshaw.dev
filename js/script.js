@@ -55,13 +55,27 @@ function addLinkElement(parent, href, text) {
     }
 }
 
-function addImageElement(parent, src, alt, className) {
+function addImageElement(parent, src, alt, className, link) {
     if (src) {
+        const imgContainer = document.createElement('div');
+        imgContainer.className = 'image-link-container';
+
         const img = document.createElement('img');
         img.src = src;
         img.alt = alt;
         img.className = className;
-        parent.appendChild(img);
+
+        if (link) {
+            const anchor = document.createElement('a');
+            anchor.href = link;
+            anchor.target = "_blank";
+            anchor.appendChild(img);
+            imgContainer.appendChild(anchor);
+        } else {
+            imgContainer.appendChild(img);
+        }
+
+        parent.appendChild(imgContainer);
     }
 }
 
@@ -99,7 +113,7 @@ function renderPortfolio() {
         if (project.image) {
             const imageContainer = document.createElement('div');
             imageContainer.className = 'project-image-container';
-            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image');
+            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image', project.link || project.github);
             projectDiv.appendChild(imageContainer);
         }
 

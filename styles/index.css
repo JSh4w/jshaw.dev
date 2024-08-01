@@ -44,6 +44,8 @@ h1 {
     width: 100%;
     max-width: 400px;
     margin: 0 auto 20px;
+    border-radius: 10px;
+    overflow: hidden;
 }
 
 .project-image {
@@ -65,6 +67,40 @@ h1 {
 
 .project a:hover {
     text-decoration: underline;
+}
+
+.image-link-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+}
+
+.image-link-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.2);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-link-container:hover::after {
+    opacity: 1;
+}
+
+.project-image {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.image-link-container:hover .project-image {
+    transform: scale(1.05);
 }
 
 #header {
@@ -110,10 +146,13 @@ h1 {
         flex-direction: row-reverse;
     }
 
-    .project-image-container {
-        flex: 0 0 45%;
-        margin: 0;
-    }
+.project-image-container {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 20px;
+    border-radius: 10px;
+    overflow: hidden;
+}
 
     .project-content {
         flex: 0 0 50%;
