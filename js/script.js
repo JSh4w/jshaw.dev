@@ -104,16 +104,23 @@ function renderPortfolio() {
     headerElement.appendChild(titlePhotoElement);
 
     addTextElement(headingElement, 'h1', portfolioData.heading);
+    
     const descriptionParagraph = document.createElement('p');
     descriptionParagraph.textContent = portfolioData.description;
-    descriptionElement.appendChild(descriptionParagraph);
+    
     const resumeButton = document.createElement('a');
     resumeButton.href = portfolioData.cv;
     resumeButton.target = "_blank";
     resumeButton.textContent = 'Resume';
     resumeButton.className = 'resume-button';
+    
+    descriptionParagraph.appendChild(document.createTextNode(' '));
     descriptionParagraph.appendChild(resumeButton);
+    
+    descriptionElement.appendChild(descriptionParagraph);
+    
     addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
+
 
     const projectsElement = document.getElementById('projects');
 
