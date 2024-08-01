@@ -1,3 +1,4 @@
+// Porfolio data structure for each project, name, description, link and image
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
     description: `Hello, I am a computer engineer with experience in semiconductor design and an interest in the HW/ SW divide.
@@ -36,6 +37,7 @@ const portfolioData = {
     ]
 };
 
+//Different elements to be added/ generated for each project
 function addTextElement(parent, tag, text) {
     if (text) {
         const element = document.createElement(tag);
@@ -79,7 +81,9 @@ function addImageElement(parent, src, alt, className, link) {
     }
 }
 
+//main function to render it all 
 function renderPortfolio() {
+
     const headerElement = document.getElementById('header');
     
     const headerContent = document.createElement('div');
@@ -100,8 +104,15 @@ function renderPortfolio() {
     headerElement.appendChild(titlePhotoElement);
 
     addTextElement(headingElement, 'h1', portfolioData.heading);
-    addTextElement(descriptionElement, 'p', portfolioData.description);
-    addLinkElement(descriptionElement, portfolioData.cv, 'resume');
+    const descriptionParagraph = document.createElement('p');
+    descriptionParagraph.textContent = portfolioData.description;
+    descriptionElement.appendChild(descriptionParagraph);
+    const resumeButton = document.createElement('a');
+    resumeButton.href = portfolioData.cv;
+    resumeButton.target = "_blank";
+    resumeButton.textContent = 'Resume';
+    resumeButton.className = 'resume-button';
+    descriptionParagraph.appendChild(resumeButton);
     addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
 
     const projectsElement = document.getElementById('projects');
@@ -113,7 +124,9 @@ function renderPortfolio() {
         if (project.image) {
             const imageContainer = document.createElement('div');
             imageContainer.className = 'project-image-container';
-            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image', project.link || project.github);
+            // Use project.link as the first choice, then project.github if link doesn't exist
+            const linkToUse = project.link || project.github || null;
+            addImageElement(imageContainer, project.image, `${project.name} image`, 'project-image', linkToUse);
             projectDiv.appendChild(imageContainer);
         }
 
