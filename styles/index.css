@@ -132,10 +132,18 @@ h1 {
     margin-bottom: 10px;
 }
 
+/* for the resume button */
 #description {
     margin-bottom: 20px;
 }
 
+#description p {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/*for title photo */
 #title-photo {
     flex: 0 0 auto;
     margin-left: 20px;
@@ -151,22 +159,17 @@ h1 {
     display: inline-block;
     background-color: #0056b3;
     color: white;
-    padding: 5px 10px;
+    padding: 8px 15px;
     border-radius: 5px;
     text-decoration: none;
-    margin-left: 10px;
+    margin-left: 15px;
     transition: background-color 0.3s ease;
+    flex-shrink: 0;
 }
 
 .resume-button:hover {
     background-color: #003d82;
     text-decoration: none;
-}
-
-#description p {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
 }
 
 /* media queries - to help with viewing on phone */

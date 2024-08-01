@@ -2,7 +2,7 @@
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
     description: `Hello, I am a computer engineer with experience in semiconductor design and an interest in the HW/ SW divide.
-    Here is my portfolio. Feel free to look at my`,
+    Here is my portfolio. Feel free to look at my resume by following the link below.`,
     cv: "assets/CV_Jonathan_Shaw.pdf",
     titlePhoto: "assets/headshot.png",
     projects: [
@@ -114,10 +114,11 @@ function renderPortfolio() {
     resumeButton.textContent = 'Resume';
     resumeButton.className = 'resume-button';
     
-    descriptionParagraph.appendChild(document.createTextNode(' '));
-    descriptionParagraph.appendChild(resumeButton);
+    const descriptionContainer = document.createElement('div');
+    descriptionContainer.appendChild(descriptionParagraph);
+    descriptionContainer.appendChild(resumeButton);
     
-    descriptionElement.appendChild(descriptionParagraph);
+    descriptionElement.appendChild(descriptionContainer);
     
     addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
 
