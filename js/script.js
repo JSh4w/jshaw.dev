@@ -81,7 +81,7 @@ function addImageElement(parent, src, alt, className, link) {
     }
 }
 
-//main function to render it all 
+//main function to render landing page
 function renderPortfolio() {
 
     const headerElement = document.getElementById('header');
@@ -113,6 +113,14 @@ function renderPortfolio() {
     resumeButton.target = "_blank";
     resumeButton.textContent = 'Resume';
     resumeButton.className = 'resume-button';
+
+    //Added a link for interesting pages and projects
+    //const linksButton = document.createElement('a');
+    //linksButton.href = 'links.html';
+    //linksButton.textContent = 'Interesting Links';
+    //linksButton.className = 'resume-button'; 
+    //descriptionParagraph.appendChild(linksButton);
+    //End of addition 
     
     const descriptionContainer = document.createElement('div');
     descriptionContainer.appendChild(descriptionParagraph);
@@ -121,7 +129,6 @@ function renderPortfolio() {
     descriptionElement.appendChild(descriptionContainer);
     
     addImageElement(titlePhotoElement, portfolioData.titlePhoto, "Your Photo", "title-photo");
-
 
     const projectsElement = document.getElementById('projects');
 
@@ -153,5 +160,47 @@ function renderPortfolio() {
     });
     
 }
+
+// Links data structure
+const linksData = [
+    {
+        name: "GitHub",
+        url: "https://github.com",
+        description: "Web-based version-control and collaboration platform for software developers."
+    },
+    {
+        name: "Stack Overflow",
+        url: "https://stackoverflow.com",
+        description: "Q&A platform for programmers to find and contribute answers to technical challenges."
+    },
+    // Add more links as needed
+];
+function renderLinks() {
+    const linksContainer = document.getElementById('links-container');
+    if (!linksContainer) return;
+
+    linksData.forEach(link => {
+        const linkDiv = document.createElement('div');
+        linkDiv.className = 'link-item';
+        
+        const nameElement = document.createElement('h2');
+        nameElement.textContent = link.name;
+        linkDiv.appendChild(nameElement);
+
+        const descriptionElement = document.createElement('p');
+        descriptionElement.textContent = link.description;
+        linkDiv.appendChild(descriptionElement);
+
+        const linkElement = document.createElement('a');
+        linkElement.href = link.url;
+        linkElement.target = "_blank";
+        linkElement.textContent = "Visit Site";
+        linkDiv.appendChild(linkElement);
+
+        linksContainer.appendChild(linkDiv);
+    });
+}
+
+
 
 document.addEventListener('DOMContentLoaded', renderPortfolio);     

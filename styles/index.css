@@ -3,6 +3,25 @@
     font-family: Calibri;
     src: url(Calibri.ttf);
 }
+/* START navigation bar */
+nav {
+    background-color: #055c5c;
+    padding: 10px 0;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+}
+
+nav a:hover {
+    background-color: #033e3e;
+}
+/* END navigation bar*/
+
 
 body {
     font-family: Calibri;
@@ -204,4 +223,29 @@ h1 {
         margin-left: 0;
         margin-top: 20px;
     }
+}
+
+
+
+/*For interests_page*/
+.link-item {
+    background-color: #00CED1;
+    margin: 20px 0;
+    padding: 20px;
+    border-radius: 5px;
+    color: white;
+}
+
+.link-item h2 {
+    margin-top: 0;
+}
+
+.link-item a {
+    color: #f0f8ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-item a:hover {
+    text-decoration: underline;
 }
