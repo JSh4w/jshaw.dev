@@ -139,6 +139,7 @@ h1 {
 /* headres for title and descroption */
 #header {
     display: flex;
+    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 20px;
@@ -146,6 +147,7 @@ h1 {
 
 #header-content {
     flex: 1;
+    margin-right: 20px;
 }
 
 #heading h1 {
@@ -168,11 +170,11 @@ h1 {
 /*for title photo */
 #title-photo {
     flex: 0 0 auto;
-    margin-left: 20px;
+    width: 150px;
 }
 
 .title-photo {
-    max-width: 150px;
+    width: 100%;
     height: auto;
     border-radius: 50%;
 }
