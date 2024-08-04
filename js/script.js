@@ -113,14 +113,6 @@ function renderPortfolio() {
     resumeButton.target = "_blank";
     resumeButton.textContent = 'Resume';
     resumeButton.className = 'resume-button';
-
-    //Added a link for interesting pages and projects
-    //const linksButton = document.createElement('a');
-    //linksButton.href = 'links.html';
-    //linksButton.textContent = 'Interesting Links';
-    //linksButton.className = 'resume-button'; 
-    //descriptionParagraph.appendChild(linksButton);
-    //End of addition 
     
     const descriptionContainer = document.createElement('div');
     descriptionContainer.appendChild(descriptionParagraph);
