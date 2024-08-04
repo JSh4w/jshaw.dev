@@ -84,6 +84,7 @@ h1 {
     background-color: #ffffff; /* Add a white background */
     border-radius: 15px; /* Increase border radius for a softer look */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    box-sizing: border-box; /* Add padding around the image */
 }
 
 .image-link-container {
@@ -120,8 +121,8 @@ h1 {
 }
 
 .project-image {
-    width: 100%;
     height: auto;
+    max-width: 100%;
     object-fit: cover;
     border-radius: 10px;
     transition: transform 0.3s ease;
@@ -206,14 +207,12 @@ h1 {
     .project-image-container {
         flex: 0 0 calc(45% - 30px); /* Adjust for padding */
         margin: 0;
+        max-width: calc(45% - 30px);
     }
 
     .project-content {
         flex: 0 0 50%;
     }
-}
-
-@media (max-width: 767px) {
     #header {
         flex-direction: column;
         align-items: center;
