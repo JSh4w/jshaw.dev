@@ -1,7 +1,9 @@
 /* importing Calibri font */
 @font-face {
-    font-family: Calibri;
-    src: url(Calibri.ttf);
+    font-family: JUST Sans Regular;
+    src: url('fonts/JUSTSans-Regular.otf') format('opentype');
+    src: url('fonts/JUSTSans-Regular.woff') format('woff');
+    src: url('fonts/JUSTSans-Regular.woff2') format('woff2');
 }
 /* START navigation bar */
 nav {
