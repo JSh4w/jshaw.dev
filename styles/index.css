@@ -139,7 +139,6 @@ h1 {
 /* headres for title and descroption */
 #header {
     display: flex;
-    flex-direction: row;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 20px;
@@ -163,14 +162,13 @@ h1 {
 
 #description p {
     display: flex;
-    align-items: center;
+    align-items: left;
     margin-bottom: 10px;
 }
 
 /*for title photo */
 #title-photo {
-    flex: 0 0 auto;
-    width: 150px;
+    flex: 0 0 150px;
 }
 
 .title-photo {
