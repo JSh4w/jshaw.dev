@@ -162,19 +162,19 @@ h1 {
 
 #description p {
     display: flex;
-    align-items: left;
+    align-items: center;
     margin-bottom: 10px;
 }
 
 /*for title photo */
 #title-photo {
-    flex: 0 0 150px;
+    flex: 0 0 150px;  /* This sets a fixed width of 150px */
 }
 
 .title-photo {
     width: 100%;
     height: auto;
-    border-radius: 50%;
+    border-radius: 50%;  /* This will make the photo circular */
 }
 
 .resume-button {
@@ -195,7 +195,7 @@ h1 {
 }
 
 /* media queries - to help with viewing on phone */
-@media (min-width: 768px) {
+@media (min-width: 767px) {
     .project {
         flex-direction: row;
         justify-content: space-between;
