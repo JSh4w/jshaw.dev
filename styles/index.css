@@ -45,7 +45,7 @@ h1 {
 }
 
 .project {
-    background-color: #00CED1;
+    background-color: #00a3a5;
     margin: 20px 0;
     padding: 20px;
     border-radius: 5px;
@@ -177,7 +177,7 @@ h1 {
 
 .resume-button {
     display: inline-block;
-    background-color: #0056b3;
+    background-color: #00a3a5;
     color: white;
     padding: 8px 15px;
     border-radius: 5px;
@@ -188,7 +188,7 @@ h1 {
 }
 
 .resume-button:hover {
-    background-color: #003d82;
+    background-color: #00a3a5;
     text-decoration: none;
 }
 
@@ -228,7 +228,7 @@ h1 {
 
 /*For interests_page*/
 .link-item {
-    background-color: #00CED1;
+    background-color: #00a3a5;
     margin: 20px 0;
     padding: 20px;
     border-radius: 5px;
