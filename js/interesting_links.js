@@ -4,19 +4,25 @@ const linksData = [
         name: "GitHub",
         url: "https://github.com",
         description: "Web-based version-control and collaboration platform for software developers."
-    },
-    {
-        name: "Stack Overflow",
-        url: "https://stackoverflow.com",
-        description: "Q&A platform for programmers to find and contribute answers to technical challenges."
-    },
+    }, 
     {
         name: "Github AI models",
         url: "https://github.com/marketplace/models",
         description: "Playground for GitHub AI models"
     },
+    {
+        name: "Stack Overflow Developer Survey",
+        url: "https://survey.stackoverflow.co/2023/#productivity-impacts-industry-ic",
+        description: `In May 2023 over 90,000 developers responded to our annual survey about how they learn and level up,
+        which tools they're using, and which ones they want.`
+    },
     // Add more links as needed
 ];
+/**
+ * Renders a list of links to the page.
+ *
+ * @return {undefined}
+ */
 function renderLinks() {
     const linksContainer = document.getElementById('links-container');
     if (!linksContainer) return;

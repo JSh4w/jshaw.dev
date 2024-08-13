@@ -1,36 +1,44 @@
 // Porfolio data structure for each project, name, description, link and image
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
-    description: `Hello, I am a computer engineer with experience in semiconductor design and an interest in the HW/ SW divide.
-    Here is my portfolio. Feel free to look at my resume by following the link below.`,
+    description: `I am a recent engineering graduate with a strong foundation in computer systems
+    and a passion for software development. Seeking a challenging Software Engineer position to
+    leverage my skills in Python, C++, and web technologies,
+    along with my experience in verification, to contribute to innovative software projects. `,
     cv: "assets/CV_Jonathan_Shaw.pdf",
     titlePhoto: "assets/headshot.png",
     projects: [
         {
             name: "Floating Point Arithmetic Tool",
             description: `When working with binary signals, debugging of datapath components often comes down to
-             hand calculations. This small programm was made to help with quick conversion of variable width floating point 
-             numbers.`,
+             hand calculations. This programme was made to help with quick conversion of variable width floating point 
+             numbers. This project is open source and can be found on github.`,
             link: "https://jsh4w.github.io/",
             github: "https://github.com/JSh4w/JSh4w.github.io",
             image: "assets/float_point_arithmetic_tool.png"
         },
         {
-            name: "Python tool combining Google Sheets, NLP and Web Scraping",
-            description: `Leveraging goole API's and webscraping to extract useful information and process 
-            tenant relevant data such as time to work in the morning. Data is then pushed to a google sheet.`,
+            name: "Python package combining Google Sheets, NLP and Web Scraping",
+            description: `Web scraping: a powerful method of data extraction for companies and software engineers 
+            to gain insights over the internet. However often lying in a grey area this tool helps with easy and safe use
+            of web scraping. Utilising natural language processing, googlesheets, numpy and a series python packages this 
+            tool can help obtain website infomration in a safe rate-limited way that respects websites robot.txt files.
+            Leveraging goole API's to provide the ability to use google sheets with custom header commands that help with
+            location finding (through geocoding and a distance matrix API), cost extraction and other typical web scraping desires
+            this tool is a simplistic solution for web scraping. This project is open source and can be found on github.`,
             github: "https://github.com/JSh4w/House_hunter",
             image: "assets/SiteToSheet.png"
         },
         {
             name: "Stock analysis MERN application",
-            description: `Simply collection and analysis of time series stock data via a web application`,
+            description: `Applying various filters for data analysis of time series stock data via a web application`,
             github: "https://github.com/JSh4w/stock_analyser",
             image: "assets/stock_analysis.png"
         },
         {
             name: "System Identification and Model-Based Reinforcement Learning for Control of a Soft Robotic Manipulator",
-            description: "4th Year project developing machine learning and neural networks to control a soft pendulum",
+            description: `4th Year project developing machine learning and neural networks to control a soft pendulum. Clicking
+            the image will take you to the pdf containing all relevant information.`,
             link: "project_pages/4M25_Robotics.pdf",
             image: "assets/4M25_robotics.png"
         }        
@@ -46,6 +54,14 @@ function addTextElement(parent, tag, text) {
     }
 }
 
+/** 
+ * Creates a new link element and appends it to the parent element.
+ *
+ * @param {HTMLElement} parent - The parent element to append the link to.
+ * @param {string} href - The URL of the link.
+ * @param {string} text - The text content of the link.
+ * @return {undefined}
+ */
 function addLinkElement(parent, href, text) {
     if (href) {
         const link = document.createElement('a');
@@ -57,6 +73,17 @@ function addLinkElement(parent, href, text) {
     }
 }
 
+/**
+ * Creates a new image element and appends it to the parent element.
+ * The image can optionally be wrapped in a link element.
+ *
+ * @param {HTMLElement} parent - The parent element to append the image to.
+ * @param {string} src - The source URL of the image.
+ * @param {string} alt - The alt text of the image.
+ * @param {string} className - The class name of the image.
+ * @param {string} link - The URL of the link to wrap the image in.
+ * @return {undefined}
+ */
 function addImageElement(parent, src, alt, className, link) {
     if (src) {
         const imgContainer = document.createElement('div');
@@ -81,7 +108,12 @@ function addImageElement(parent, src, alt, className, link) {
     }
 }
 
-//main function to render landing page
+
+/**
+ * Renders the portfolio page by creating and populating the necessary HTML elements.
+ * 
+ * @return {undefined}
+ */
 function renderPortfolio() {
 
     const headerElement = document.getElementById('header');
