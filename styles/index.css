@@ -5,29 +5,40 @@
     src: url('fonts/JUSTSans-Regular.woff') format('woff');
     src: url('fonts/JUSTSans-Regular.woff2') format('woff2');
 }
+/* END importing Calibri font */
+
+/* START global styles */
+:root {
+    --primary-color: #055757;
+    --secondary-color: #032624;
+    --background-color: rgb(244, 245, 238);
+    --font-color: rgb(244,245,238);
+  }
+/* END global styles */
+
 /* START navigation bar */
 nav {
-    background-color: #055c5c;
+    background-color: var(--primary-color);
     padding: 10px 0;
     text-align: center;
 }
 
 nav a {
-    color: white;
+    color: var(--font-color);
     text-decoration: none;
     padding: 10px 20px;
     margin: 0 10px;
 }
 
 nav a:hover {
-    background-color: #033e3e;
+    background-color: var(--secondary-color);
 }
 /* END navigation bar*/
 
 
 body {
     font-family: Calibri;
-    background-color: #f0f8ff;
+    background-color: var(--background-color);
     margin: 0;
     padding: 0;
 }
@@ -36,22 +47,22 @@ body {
     max-width: 800px;
     margin: 0 auto;
     padding: 20px;
-    background-color: #ffffff;
+    background-color: var(--background-color);
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
 h1 {
-    color: #055c5c;
+    color: var(--primary-color);
     text-align: center;
 }
 
 .project {
-    background-color: #00a3a5;
+    background-color: var(--primary-color);
     margin: 20px 0;
     padding: 20px;
     border-radius: 5px;
-    color: white;
+    color: var(--font-color);
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -67,7 +78,7 @@ h1 {
 }
 
 .project a {
-    color: #f0f8ff;
+    color: var(--font-color);
     text-decoration: none;
     font-weight: bold;
 }
@@ -83,7 +94,7 @@ h1 {
     max-width: 400px;
     margin: 0 auto 20px;
     padding: 15px; /* Add padding around the image */
-    background-color: #ffffff; /* Add a white background */
+    background-color: var(--background-color); /* Add a white background */
     border-radius: 15px; /* Increase border radius for a softer look */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
     box-sizing: border-box; /* Add padding around the image */
@@ -149,7 +160,7 @@ h1 {
 }
 
 #heading h1 {
-    color: #055c5c;
+    color: var(--primary-color);
     text-align: left;
     margin-bottom: 10px;
 }
@@ -179,8 +190,8 @@ h1 {
 
 .resume-button {
     display: inline-block;
-    background-color: #00a3a5;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--font-color);
     padding: 8px 15px;
     border-radius: 5px;
     text-decoration: none;
@@ -190,7 +201,7 @@ h1 {
 }
 
 .resume-button:hover {
-    background-color: #00a3a5;
+    background-color: var(--primary-color);
     text-decoration: none;
 }
 
@@ -232,11 +243,11 @@ h1 {
 
 /*For interests_page*/
 .link-item {
-    background-color: #00a3a5;
+    background-color: var(--primary-color);
     margin: 20px 0;
     padding: 20px;
     border-radius: 5px;
-    color: white;
+    color: var(--font-color);
 }
 
 .link-item h2 {
@@ -244,7 +255,7 @@ h1 {
 }
 
 .link-item a {
-    color: #f0f8ff;
+    color: var(--font-color);
     text-decoration: none;
     font-weight: bold;
 }
