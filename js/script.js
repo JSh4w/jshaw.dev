@@ -22,7 +22,7 @@ const portfolioData = {
             description: `Web scraping: a powerful method of data extraction for companies and software engineers 
             to gain insights over the internet. However often lying in a grey area this tool helps with easy and safe use
             of web scraping. Utilising natural language processing, googlesheets, numpy and a series python packages this 
-            tool can help obtain website infomration in a safe rate-limited way that respects websites robot.txt files.
+            tool can help obtain website information in a safe rate-limited way that respects websites robot.txt files.
             Leveraging goole API's to provide the ability to use google sheets with custom header commands that help with
             location finding (through geocoding and a distance matrix API), cost extraction and other typical web scraping desires
             this tool is a simplistic solution for web scraping. This project is open source and can be found on github.`,
