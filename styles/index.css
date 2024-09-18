@@ -165,9 +165,9 @@ h1 {
     margin-bottom: 10px;
 }
 
-/* for the resume button */
+/* for the resume description */
 #description {
-    margin-bottom: 20px;
+    margin-bottom: 0px;
 }
 
 #description p {
@@ -188,19 +188,26 @@ h1 {
     border-radius: 50%;
 }
 
-.resume-button {
+/* for portfolio buttons */
+.button-container {
+    display: flex;
+    gap: 0px;
+    margin-top: 10px;
+}
+
+.portfolio-button {
     display: inline-block;
     background-color: var(--primary-color);
     color: var(--font-color);
-    padding: 8px 15px;
-    border-radius: 5px;
+    padding: 10px 20px;
+    border-radius: 10px;
     text-decoration: none;
-    margin-left: 15px;
+    margin-right: 20px;
     transition: background-color 0.3s ease;
     flex-shrink: 0;
 }
 
-.resume-button:hover {
+.portfolio-button:hover {
     background-color: var(--primary-color);
     text-decoration: none;
 }

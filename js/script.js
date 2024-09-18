@@ -6,6 +6,8 @@ const portfolioData = {
     leverage my skills in Python, C++, and web technologies,
     along with my experience in verification, to contribute to innovative software projects. `,
     cv: "assets/CV_Jonathan_Shaw.pdf",
+    github: "https://github.com/JSh4w",
+    linkedin: "www.linkedin.com/in/j-m-shaw",
     titlePhoto: "assets/headshot.png",
     projects: [
         {
@@ -44,6 +46,16 @@ const portfolioData = {
         }        
     ]
 };
+
+//Creating buttons for resume, linkedin, github etc
+function createButton(href, text) {
+    const button = document.createElement('a');
+    button.href = href;
+    button.target = "_blank";
+    button.textContent = text;
+    button.className = 'portfolio-button';
+    return button;
+}
 
 //Different elements to be added/ generated for each project
 function addTextElement(parent, tag, text) {
@@ -140,15 +152,20 @@ function renderPortfolio() {
     const descriptionParagraph = document.createElement('p');
     descriptionParagraph.textContent = portfolioData.description;
     
-    const resumeButton = document.createElement('a');
-    resumeButton.href = portfolioData.cv;
-    resumeButton.target = "_blank";
-    resumeButton.textContent = 'Resume';
-    resumeButton.className = 'resume-button';
-    
+    const buttonContainer = document.createElement('div');
+    buttonContainer.className = 'button-container';
+
+    const resumeButton = createButton(portfolioData.cv, 'Resume');
+    const githubButton = createButton(portfolioData.github, 'Github');
+    const linkedinButton = createButton(portfolioData.linkedin, 'Linkedin');
+
+    buttonContainer.appendChild(resumeButton);
+    buttonContainer.appendChild(githubButton);
+    buttonContainer.appendChild(linkedinButton);
+
     const descriptionContainer = document.createElement('div');
     descriptionContainer.appendChild(descriptionParagraph);
-    descriptionContainer.appendChild(resumeButton);
+    descriptionContainer.appendChild(buttonContainer);
     
     descriptionElement.appendChild(descriptionContainer);
     
