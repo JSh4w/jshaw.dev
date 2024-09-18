@@ -7,7 +7,7 @@ const portfolioData = {
     along with my experience in verification, to contribute to innovative software projects. `,
     cv: "assets/CV_Jonathan_Shaw.pdf",
     github: "https://github.com/JSh4w",
-    linkedin: "www.linkedin.com/in/j-m-shaw",
+    linkedin: "https://linkedin.com/in/j-m-shaw",
     titlePhoto: "assets/headshot.png",
     projects: [
         {
