@@ -1,9 +1,9 @@
 // Porfolio data structure for each project, name, description, link and image
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
-    description: `I am a recent engineering graduate with a strong foundation in computer systems
-    and a passion for software development. Seeking a challenging Software Engineer position to
-    leverage my skills in Python, C++, and web technologies,
+    description: `A recent engineering graduate with foundations in computer systems
+    and a passion for software development. Excited by advancements in AI, data analysis and GPU 
+    design I enjoy leveraging my skills in Python, C++, and web technologies,
     along with my experience in verification, to contribute to innovative software projects. `,
     cv: "assets/CV_Jonathan_Shaw.pdf",
     github: "https://github.com/JSh4w",
@@ -12,7 +12,7 @@ const portfolioData = {
     projects: [
         {
             name: "Floating Point Arithmetic Tool",
-            description: `When working with binary signals, debugging of datapath components often comes down to
+            description: `When working with floating point signals, debugging of datapath components often comes down to
              hand calculations. This programme was made to help with quick conversion of variable width floating point 
              numbers. This project is open source and can be found on github.`,
             link: "https://jsh4w.github.io/",
@@ -21,19 +21,21 @@ const portfolioData = {
         },
         {
             name: "Python package combining Google Sheets, NLP and Web Scraping",
-            description: `Web scraping: a powerful method of data extraction for companies and software engineers 
-            to gain insights over the internet. However often lying in a grey area this tool helps with easy and safe use
-            of web scraping. Utilising natural language processing, googlesheets, numpy and a series python packages this 
-            tool can help obtain website information in a safe rate-limited way that respects websites robot.txt files.
-            Leveraging goole API's to provide the ability to use google sheets with custom header commands that help with
-            location finding (through geocoding and a distance matrix API), cost extraction and other typical web scraping desires
-            this tool is a simplistic solution for web scraping. This project is open source and can be found on github.`,
+            description: `This tool helps with easy and safe use of web scraping, outputting the data to a user-defined
+            google sheets file. By utilising natural language processing, googlesheets, NumPy and a series python packages this tool
+            can help obtain website information in a safe rate-limited way that respects websites robot.txt files. 
+            Use of Google's distance matrix API allows users to set custom locations to search for journey times.
+            This project is open source and can be found on github.`,
             github: "https://github.com/JSh4w/House_hunter",
             image: "assets/SiteToSheet.png"
         },
         {
             name: "Stock analysis MERN application",
-            description: `Applying various filters for data analysis of time series stock data via a web application`,
+            description: `While Stock analysis is traditionally done via Python for time-series analysis, and 
+            C++ for high-speed trading I wanted to create a web application that could be used to 
+            analyse stock prices with Javacript. I used React.js, Node.js, MongoDB, and C++ to create this application. While using more 
+            simplistic algorithms such as ARIMA (Auto-regressive Integral Moving Average) and the standard Kalman filter 
+            this web app provides some insight into stock predicitions and can be used for lightweight processing.`,
             github: "https://github.com/JSh4w/stock_analyser",
             image: "assets/stock_analysis.png"
         },

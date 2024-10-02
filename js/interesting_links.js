@@ -1,14 +1,16 @@
 // Links data structure
 const linksData = [
     {
-        name: "GitHub",
-        url: "https://github.com",
-        description: "Web-based version-control and collaboration platform for software developers."
+        name: "Roadmaps",
+        url: "https://roadmap.sh/",
+        description: `A powerful website that provides consice information about different careers in tech.
+        While the information is not in full it provides a fun "guide" style approach that users can check off.`
     }, 
     {
-        name: "Github AI models",
-        url: "https://github.com/marketplace/models",
-        description: "Playground for GitHub AI models"
+        name: "First Timers Only Blog",
+        url: "https://kentcdodds.com/blog/first-timers-only",
+        description: `A blog by Kent C. Dodds that aims to help first time programmers get onto open source projects.
+        Namely, I believe this helped start the "first-timers-only" tags on Github along with subesquent variations of the tag.`
     },
     {
         name: "Stack Overflow Developer Survey",
@@ -16,8 +18,12 @@ const linksData = [
         description: `In May 2023 over 90,000 developers responded to our annual survey about how they learn and level up,
         which tools they're using, and which ones they want.`
     },
-    // Add more links as needed
 ];
+/**
+ * Still to add : https://refine.dev/
+ * 
+ * 
+ */
 /**
  * Renders a list of links to the page.
  *
@@ -44,7 +50,7 @@ function renderLinks() {
         linkElement.target = "_blank";
         linkElement.textContent = "Visit Site";
         linkDiv.appendChild(linkElement);
-
+  
         linksContainer.appendChild(linkDiv);
     });
 }
