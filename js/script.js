@@ -31,11 +31,8 @@ const portfolioData = {
         },
         {
             name: "Stock analysis MERN application",
-            description: `While Stock analysis is traditionally done via Python for time-series analysis, and 
-            C++ for high-speed trading I wanted to create a web application that could be used to 
-            analyse stock prices with Javacript. I used React.js, Node.js, MongoDB, and C++ to create this application. While using more 
-            simplistic algorithms such as ARIMA (Auto-regressive Integral Moving Average) and the standard Kalman filter 
-            this web app provides some insight into stock predicitions and can be used for lightweight processing.`,
+            description: `A MongoDB, Express.js, React.js, Node.js, and C++ application that allows users to analyse stock prices,
+            providing a prediction of closing stock values for the next day`,
             github: "https://github.com/JSh4w/stock_analyser",
             image: "assets/stock_analysis.png"
         },
