@@ -257,6 +257,15 @@ h1 {
     color: var(--font-color);
 }
 
+.link-image {
+    padding: 10px;
+    width: 100%;
+    margin: 0 auto 20px;
+    background-color: var(--background-color); /* Add a white background */
+    border-radius: 15px; /* Increase border radius for a softer look */
+    box-sizing: border-box; /* Add padding around the image */
+}
+
 .link-item h2 {
     margin-top: 0;
 }
