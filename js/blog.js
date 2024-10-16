@@ -3,8 +3,7 @@ const linksData = [
     {
         name: "Interesting Links and Resources",
         url: "interesting_links.html",
-        description: `A powerful website that provides consice information about different careers in tech.
-        While the information is not in full it provides a fun "guide" style approach that users can check off.`
+        description: `A small list of websites that I've found interesting, useful or fun. Please check them out!`,
     }
 ];
 /**
@@ -17,9 +16,9 @@ const linksData = [
  *
  * @return {undefined}
  */
-function renderLinks() {
+function renderLinks() { 
     const linksContainer = document.getElementById('links-container');
-    if (!linksContainer) return;
+    if (!linksContainer) return;   
 
     linksData.forEach(link => {
         const linkDiv = document.createElement('div');
@@ -35,7 +34,7 @@ function renderLinks() {
 
         const linkElement = document.createElement('a');
         linkElement.href = link.url;
-        linkElement.target = "_blank";
+        linkElement.target = "_self";
         linkElement.textContent = "Visit Site";
         linkDiv.appendChild(linkElement);
   
