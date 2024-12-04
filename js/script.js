@@ -42,7 +42,7 @@ const portfolioData = {
             the image will take you to the pdf containing all relevant information.`,
             link: "project_pages/4M25_Robotics.pdf",
             image: "assets/4M25_robotics.png"
-        }        
+        },
     ]
 };
 

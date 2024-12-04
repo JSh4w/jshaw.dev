@@ -4,6 +4,11 @@ const linksData = [
         name: "Interesting Links and Resources",
         url: "interesting_links.html",
         description: `A small list of websites that I've found interesting, useful or fun. Please check them out!`,
+    },
+    {
+        name: "Favourite Algorithms and Logic Questions",
+        url: "algorithms_gist.html",
+        description: "A list of favourite algorithms, logic questions and such. Links to Github gists and so on"
     }
 ];
 /**
