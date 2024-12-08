@@ -1,9 +1,0 @@
-[build]
-    publish = "html"   # index.html file location
-    command = ""       # Leave empty as no build command
-
-[[redirects]]
-    from = "/*"
-    to = "/index.html"
-    status = 200
-    force = true
