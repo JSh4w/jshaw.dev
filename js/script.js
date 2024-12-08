@@ -8,8 +8,8 @@ const portfolioData = {
     cv: "assets/CV_Jonathan_Shaw.pdf",
     github: "https://github.com/JSh4w",
     linkedin: "https://linkedin.com/in/j-m-shaw",
-    titlePhoto: "assets/headshot.png",
-    projects: [
+    titlePhoto: "../assets/headshot.png",
+    projects: [ 
         {
             name: "Floating Point Arithmetic Tool",
             description: `When working with floating point signals, debugging of datapath components often comes down to
@@ -17,7 +17,7 @@ const portfolioData = {
              numbers. This project is open source and can be found on github.`,
             link: "https://jsh4w.github.io/",
             github: "https://github.com/JSh4w/JSh4w.github.io",
-            image: "assets/float_point_arithmetic_tool.png"
+            image: "../assets/float_point_arithmetic_tool.png"
         },
         {
             name: "Python package combining Google Sheets, NLP and Web Scraping",
@@ -27,21 +27,21 @@ const portfolioData = {
             Use of Google's distance matrix API allows users to set custom locations to search for journey times.
             This project is open source and can be found on github.`,
             github: "https://github.com/JSh4w/House_hunter",
-            image: "assets/SiteToSheet.png"
+            image: "../assets/SiteToSheet.png"
         },
         {
             name: "Stock analysis MERN application",
             description: `A MongoDB, Express.js, React.js, Node.js, and C++ application that allows users to analyse stock prices,
             providing a prediction of closing stock values for the next day`,
             github: "https://github.com/JSh4w/stock_analyser",
-            image: "assets/stock_analysis.png"
+            image: "../assets/stock_analysis.png"
         },
         {
             name: "System Identification and Model-Based Reinforcement Learning for Control of a Soft Robotic Manipulator",
             description: `4th Year project developing machine learning and neural networks to control a soft pendulum. Clicking
             the image will take you to the pdf containing all relevant information.`,
             link: "project_pages/4M25_Robotics.pdf",
-            image: "assets/4M25_robotics.png"
+            image: "../assets/4M25_robotics.png"
         },
     ]
 };

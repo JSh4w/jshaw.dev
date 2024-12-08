@@ -7,33 +7,19 @@
 }
 /* END importing Calibri font */
 
+/* Note "." is prefix for classes and "#" is prefix for ID selector */
+/* ":" are used for pseudo-elements and pseudo-classes primarily */
+
 /* START global styles */
 :root {
     --primary-color: #055757;
     --secondary-color: #032624;
-    --background-color: rgb(244, 245, 238);
-    --font-color: rgb(244,245,238);
+    --background-color: rgb(246, 247, 242);
+    --font-color: var(--background-color);
   }
 /* END global styles */
 
-/* START navigation bar */
-nav {
-    background-color: var(--primary-color);
-    padding: 10px 0;
-    text-align: center;
-}
 
-nav a {
-    color: var(--font-color);
-    text-decoration: none;
-    padding: 10px 20px;
-    margin: 0 10px;
-}
-
-nav a:hover {
-    background-color: var(--secondary-color);
-}
-/* END navigation bar*/
 
 
 body {
@@ -52,21 +38,7 @@ body {
     box-shadow: 0 0 10px rgba(0,0,0,0.1);
 }
 
-/* content container for Gist embeddings */
-#content-container {
-    max-width: 800px;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: var(--background-color);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-h1 {
-    color: var(--primary-color);
-    text-align: center;
-}
-
+/* START Project class */
 .project {
     background-color: var(--primary-color);
     margin: 20px 0;
@@ -96,6 +68,7 @@ h1 {
 .project a:hover {
     text-decoration: underline;
 }
+/* END Project class var(--background-color); */
 
 
 /*image link container for project images*/

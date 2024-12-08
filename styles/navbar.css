@@ -1,0 +1,118 @@
+/* Basic styles for the navigation bar */
+.navbar {
+    background-color: var(--primary-color); /* Green background */
+    color: white; /* White text */
+    padding: 10px 20px; /* Padding for spacing */
+    position: relative; /* Positioning for dropdown */
+}
+
+.container_nav {
+    display: flex; /* Flexbox for layout */
+    justify-content: space-between; /* Space between logo and links */
+    align-items: center; /* Center items vertically */
+    max-width: 1200px; /* Max width for the container */
+    margin: 0 auto; /* Center the container */
+}
+
+.nav-links {
+    list-style: none; /* Remove bullet points */
+    display: flex; /* Flexbox for horizontal layout */
+    gap: 20px; /* Space between links */
+}
+
+.nav-links a {
+    text-decoration: none; /* Remove underline */
+    color: white; /* Link color */
+    padding: 8px 12px; /* Padding for clickable area */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+}
+
+.nav-links a:hover {
+    background-color: var(--secondary-color); /* Darker green on hover */
+    transform: scale(1.0); /* Slightly enlarge on hover */
+}
+
+/* Dropdown styles */
+.dropdown {
+    display: none; /* Hide dropdown by default */
+    background-color: var(--primary-color); /* Same background as navbar */
+    min-width: 160px; /* Minimum width for dropdown */
+    z-index: 1; /* Ensure dropdown is above other content */
+    padding: 5px; /* Remove padding */
+    margin-top: 10px; /* Space between the dropdown and the parent link */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+}
+
+/* Increase hover detection area for the dropdown toggle */
+.nav-links li {
+    position: relative; /* Ensure positioning for pseudo-element */
+}
+
+/* Add a larger hover area using a pseudo-element */
+.nav-links li::before {
+    content: '';
+    position: absolute;
+    top: -10px; /* Extend above */
+    left: -10px; /* Extend to the left */
+    right: -10px; /* Extend to the right */
+    bottom: -10px; /* Extend below */
+    z-index: -1; /* Ensure it is below the content */
+}
+
+/* Show dropdown when hovering over the parent li */
+.nav-links li:hover .dropdown {
+    display: block; /* Show dropdown when hovering over parent */
+}
+
+/* Optional: Show dropdown when the 'show' class is added */
+.dropdown.show {
+    display: block; /* Show dropdown when the 'show' class is added */
+}
+
+.dropdown li {
+    list-style: none; /* Remove bullet points */
+    padding: 10px; /* Padding for dropdown items */
+}
+
+.dropdown li a {
+    display: block; /* Make dropdown items block elements */
+    color: white; /* Link color */
+    text-decoration: none; /* Remove underline */
+    transition: background-color 0.3s; /* Smooth transition */
+}
+
+.dropdown li a:hover {
+    background-color: var(--secondary-color); /* Darker green on hover */
+}
+
+/* Mobile styles */
+.navbar-toggle {
+    display: none; /* Hide toggle button by default */
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .navbar-toggle {
+        display: block; /* Show toggle button on mobile */
+        background: none;
+        border: none;
+        font-size: 24px; /* Adjust size as needed */
+        color: white; /* Toggle button color */
+        cursor: pointer; /* Pointer cursor */
+    }
+
+    .nav-links {
+        display: none; /* Hide links by default on mobile */
+        flex-direction: column; /* Stack links vertically */
+        position: absolute; /* Positioning for dropdown */
+        top: 60px; /* Position below the navbar */
+        left: 0; /* Align to the left */
+        background-color: var(--secondary-color); /* Background for dropdown */
+        width: 100%; /* Full width */
+    }
+
+    .nav-links.active {
+        display: flex; /* Show links when active */
+    }
+}

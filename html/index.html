@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jonty's Portfolio</title>
+    <link rel="icon" href="../assets/headshot.png">
+    <link rel="stylesheet" href="../styles/index.css">
+    <link rel="stylesheet" href="../styles/navbar.css">
+</head>
+<body>
+    <div id="navbar-container"></div>
+    <div class="container">
+        <dib id="header"></dib>
+        <div id="description"></div>
+        <div id="projects"></div>
+    </div>
+    <script src="../js/script.js"></script>
+    <script>
+        // Fetch and include the navbar HTML
+        fetch('navbar.html')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok: ' + response.statusText);
+                }
+                return response.text();
+            })
+            .then(data => {
+                document.getElementById('navbar-container').innerHTML = data;
+                // Load the navbar script after the navbar is added to the DOM
+                const script = document.createElement('script');
+                script.src = '../js/navbar.js'; // Adjust the path if necessary
+                document.body.appendChild(script);
+            })
+            .catch(error => console.error('Error loading navbar:', error));
+    </script>
+</body>
+</html>
