@@ -86,7 +86,7 @@
     background-color: var(--secondary-color); /* Darker green on hover */
 }
 
-/* Mobile styles */
+/* No toggle on dekstop */
 .navbar-toggle {
     display: none; /* Hide toggle button by default */
 }

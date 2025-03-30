@@ -1,11 +1,14 @@
-/* importing Calibri font */
+/* START importing JUST Sans Regular font */
 @font-face {
-    font-family: JUST Sans Regular;
-    src: url('fonts/JUSTSans-Regular.otf') format('opentype');
-    src: url('fonts/JUSTSans-Regular.woff') format('woff');
-    src: url('fonts/JUSTSans-Regular.woff2') format('woff2');
+    font-family: 'JUST Sans Regular';
+    src: url('fonts/JUST Sans Regular.otf') format('otf'),
+         url('fonts/JUST Sans Regular.woff') format('woff'),
+         url('fonts/JUST Sans Regular.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap; /* This helps prevent FOUT (Flash of Unstyled Text) */
 }
-/* END importing Calibri font */
+/* END font import */
 
 /* Note "." is prefix for classes and "#" is prefix for ID selector */
 /* ":" are used for pseudo-elements and pseudo-classes primarily */
@@ -20,10 +23,8 @@
 /* END global styles */
 
 
-
-
 body {
-    font-family: Calibri;
+    font-family: 'JUST Sans Regular', Calibri, Arial, sans-serif;
     background-color: var(--background-color);
     margin: 0;
     padding: 0;
@@ -203,6 +204,7 @@ body {
         align-items: flex-start;
     }
 
+    /*flips project view each row */
     .project:nth-child(even) {
         flex-direction: row-reverse;
     }
@@ -217,6 +219,7 @@ body {
         flex: 0 0 50%;
     }
 }
+
 @media (max-width:  767px) {
     #header {
         flex-direction: column;
