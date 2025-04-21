@@ -41,8 +41,14 @@ const portfolioData = {
             description: `4th Year project developing machine learning and neural networks to control a soft pendulum. Clicking
             the image will take you to the pdf containing all relevant information.`,
             link: "project_pages/4M25_Robotics.pdf",
-            image: "assets/4M25_robotics.png"
+            image: "project_pages/4M25_robotics.png"
         },
+        {
+            name: "Molecular Electronic Devices",
+            description:   `4th Year Master's Project on developing molecular devices as an alternative to transistor technology`,
+            link: "project_pages/Masters_Thesis_Jonathan_Shaw.pdf",
+            image: "project_pages/Masters_Thesis_Jonathan_Shaw.png"
+        }
     ]
 };
 
