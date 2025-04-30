@@ -48,6 +48,13 @@ const portfolioData = {
             description:   `4th Year Master's Project on developing molecular devices as an alternative to transistor technology`,
             link: "project_pages/Masters_Thesis_Jonathan_Shaw.pdf",
             image: "project_pages/Masters_Thesis_Jonathan_Shaw.png"
+        },
+        {
+            name: "FloatVar",
+            description: `A website for displaying variable width floating point values, rounded via RNE. It accepts
+            decimal, hexadecimal and binary toggle inputs. Uses a custom underlying floatXRNE data structure`,
+            link: "https://floatvar.netlify.app/",
+            image: "assets/floatvar.png"
         }
     ]
 };
