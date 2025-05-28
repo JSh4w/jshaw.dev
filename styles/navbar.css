@@ -183,20 +183,22 @@
     }
 
     .nav-links {
-        display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 80px;
         left: 0;
-        right: 0;
+        width: 100%;
         background: var(--secondary-color);
         flex-direction: column;
         gap: 0;
         box-shadow: var(--shadow-heavy);
         border-radius: 0 0 var(--border-radius) var(--border-radius);
+        transform: translateX(-100%);
+        transition: transform var(--transition-medium);
+        z-index: 999;
     }
 
     .nav-links.active {
-        display: flex;
+        transform: translateX(0);
     }
 
     .nav-links li {
@@ -222,12 +224,13 @@
         margin: 0;
         border: none;
         border-radius: 0;
+        opacity: 1;
+        visibility: visible;
+        display: none;
     }
 
     .nav-links li:hover .dropdown,
     .dropdown.show {
-        opacity: 1;
-        visibility: visible;
         display: block;
     }
 
