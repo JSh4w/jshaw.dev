@@ -29,7 +29,7 @@
                 document.getElementById('navbar-container').innerHTML = data;
                 // Load the navbar script after the navbar is added to the DOM
                 const script = document.createElement('script');
-                script.src = '../js/navbar.js'; // Adjust the path if necessary
+                script.src = '/js/navbar.js'; // Adjust the path if necessary
                 document.body.appendChild(script);
             })
             .catch(error => console.error('Error loading navbar:', error));
