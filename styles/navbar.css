@@ -1,118 +1,283 @@
-/* Basic styles for the navigation bar */
+/* Modern navbar with gradient and blur effects */
 .navbar {
-    background-color: var(--primary-color); /* Green background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding for spacing */
-    position: relative; /* Positioning for dropdown */
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    backdrop-filter: blur(10px);
+    box-shadow: var(--shadow-medium);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: all var(--transition-medium);
+}
+
+.navbar.scrolled {
+    background: rgba(5, 87, 87, 0.95);
+    backdrop-filter: blur(20px);
 }
 
 .container_nav {
-    display: flex; /* Flexbox for layout */
-    justify-content: space-between; /* Space between logo and links */
-    align-items: center; /* Center items vertically */
-    max-width: 1200px; /* Max width for the container */
-    margin: 0 auto; /* Center the container */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
 }
 
 .nav-links {
-    list-style: none; /* Remove bullet points */
-    display: flex; /* Flexbox for horizontal layout */
-    gap: 20px; /* Space between links */
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    position: relative;
 }
 
 .nav-links a {
-    text-decoration: none; /* Remove underline */
-    color: white; /* Link color */
-    padding: 8px 12px; /* Padding for clickable area */
-    transition: background-color 0.3s, transform 0.3s; /* Smooth transition */
+    color: var(--text-inverse);
+    text-decoration: none;
+    font-weight: 500;
+    padding: 0.75rem 1.25rem;
+    border-radius: var(--border-radius);
+    position: relative;
+    transition: all var(--transition-medium);
+    overflow: hidden;
+    display: block;
+}
+
+/* Fixed shimmer effect */
+.nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+    transition: left 0.6s ease;
+    z-index: 1;
+}
+
+.nav-links a:hover::before {
+    left: 100%;
 }
 
 .nav-links a:hover {
-    background-color: var(--secondary-color); /* Darker green on hover */
-    transform: scale(1.0); /* Slightly enlarge on hover */
+    background-color: rgba(255,255,255,0.15);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
-/* Dropdown styles */
+/* Ensure text is above shimmer effect */
+.nav-links a span,
+.nav-links a {
+    position: relative;
+    z-index: 2;
+}
+
+/* Fixed dropdown positioning and styling */
 .dropdown {
-    display: none; /* Hide dropdown by default */
-    background-color: var(--primary-color); /* Same background as navbar */
-    min-width: 160px; /* Minimum width for dropdown */
-    z-index: 1; /* Ensure dropdown is above other content */
-    padding: 5px; /* Remove padding */
-    margin-top: 10px; /* Space between the dropdown and the parent link */
-    border-radius: 5px; /* Rounded corners */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
-}
-
-/* Increase hover detection area for the dropdown toggle */
-.nav-links li {
-    position: relative; /* Ensure positioning for pseudo-element */
-}
-
-/* Add a larger hover area using a pseudo-element */
-.nav-links li::before {
-    content: '';
     position: absolute;
-    top: -10px; /* Extend above */
-    left: -10px; /* Extend to the left */
-    right: -10px; /* Extend to the right */
-    bottom: -10px; /* Extend below */
-    z-index: -1; /* Ensure it is below the content */
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
+    background: var(--surface-color);
+    min-width: 220px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-heavy);
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-medium);
+    border: 1px solid rgba(0,0,0,0.1);
+    overflow: hidden;
 }
 
-/* Show dropdown when hovering over the parent li */
+/* Show dropdown on hover with proper alignment */
 .nav-links li:hover .dropdown {
-    display: block; /* Show dropdown when hovering over parent */
-}
-
-/* Optional: Show dropdown when the 'show' class is added */
-.dropdown.show {
-    display: block; /* Show dropdown when the 'show' class is added */
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 .dropdown li {
-    list-style: none; /* Remove bullet points */
-    padding: 10px; /* Padding for dropdown items */
+    padding: 0;
+    list-style: none;
 }
 
-.dropdown li a {
-    display: block; /* Make dropdown items block elements */
-    color: white; /* Link color */
-    text-decoration: none; /* Remove underline */
-    transition: background-color 0.3s; /* Smooth transition */
+.dropdown a {
+    display: block;
+    color: var(--text-primary) !important;
+    padding: 0.875rem 1.25rem;
+    border-radius: 0;
+    margin: 0;
+    font-weight: 400;
+    transition: all var(--transition-fast);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
 }
 
-.dropdown li a:hover {
-    background-color: var(--secondary-color); /* Darker green on hover */
+.dropdown a:last-child {
+    border-bottom: none;
 }
 
-/* No toggle on dekstop */
+.dropdown a::before {
+    display: none; /* Remove shimmer from dropdown items */
+}
+
+.dropdown a:hover {
+    background-color: var(--background-color);
+    transform: translateX(8px);
+    color: var(--primary-color) !important;
+    box-shadow: none;
+}
+
+/* Mobile hamburger menu */
 .navbar-toggle {
-    display: none; /* Hide toggle button by default */
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: var(--border-radius);
+    transition: all var(--transition-fast);
+}
+
+.navbar-toggle:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+.hamburger {
+    width: 24px;
+    height: 18px;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: var(--text-inverse);
+    margin: 4px 0;
+    transition: all var(--transition-medium);
+    border-radius: 1px;
+}
+
+.navbar-toggle.active .hamburger span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.navbar-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.navbar-toggle.active .hamburger span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
 }
 
 /* Responsive styles */
 @media (max-width: 768px) {
     .navbar-toggle {
-        display: block; /* Show toggle button on mobile */
-        background: none;
-        border: none;
-        font-size: 24px; /* Adjust size as needed */
-        color: white; /* Toggle button color */
-        cursor: pointer; /* Pointer cursor */
+        display: block;
     }
 
     .nav-links {
-        display: none; /* Hide links by default on mobile */
-        flex-direction: column; /* Stack links vertically */
-        position: absolute; /* Positioning for dropdown */
-        top: 60px; /* Position below the navbar */
-        left: 0; /* Align to the left */
-        background-color: var(--secondary-color); /* Background for dropdown */
-        width: 100%; /* Full width */
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: white;
+        flex-direction: column;
+        gap: 0;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        border: 1px solid #ddd;
     }
 
     .nav-links.active {
-        display: flex; /* Show links when active */
+        display: flex;
+    }
+
+    .nav-links li {
+        width: 100%;
+    }
+
+    .nav-links a {
+        color: #333 !important;
+        padding: 1rem 1.5rem;
+        border-radius: 0;
+        border-bottom: 1px solid #eee;
+        font-size: 1.1rem;
+        font-weight: 500;
+        background: none;
+        transition: background-color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+        background-color: #f5f5f5;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .nav-links a::before {
+        display: none; /* Remove shimmer effect on mobile */
+    }
+
+    .nav-links a:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown {
+        position: static;
+        transform: none;
+        background: #f9f9f9;
+        box-shadow: none;
+        border: none;
+        border-radius: 0;
+        margin: 0;
+        border-top: 1px solid #eee;
+        width: 100%;
+        left: 0;
+        right: 0;
+    }
+
+    .nav-links li:hover .dropdown,
+    .dropdown.show {
+        opacity: 1;
+        visibility: visible;
+        display: block;
+    }
+
+    .dropdown li {
+        width: 100%;
+    }
+
+    .dropdown a {
+        color: #555 !important;
+        padding: 0.75rem 1.5rem;
+        background: #f9f9f9;
+        font-size: 1rem;
+        font-weight: 400;
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        box-sizing: border-box;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    
+    .dropdown a:last-child {
+        border-bottom: none;
+    }
+
+    .dropdown a:hover {
+        background-color: #e9e9e9;
+        color: #333 !important;
+        transform: none;
+    }
+
+    .container_nav {
+        padding: 1rem;
     }
 }

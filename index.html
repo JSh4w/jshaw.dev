@@ -9,30 +9,35 @@
     <link rel="stylesheet" href="styles/navbar.css">
 </head>
 <body>
-    <div id="navbar-container"></div>
+    <nav class="navbar" id="navbar">
+        <div class="container_nav">
+            <a href="#" class="logo">JS</a>
+            <button class="navbar-toggle" id="navToggle">
+                <div class="hamburger">
+                    <span></span>   
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li style="position: relative;">
+                    <a href="html/links.html">Blog</a>
+                    <ul class="dropdown">
+                        <li><a href="html/interesting_links.html">Interesting links</a></li>
+                        <li><a href="html/algorithms_gist.html">Algorithms for Advent of Code</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </nav>
     <div class="container">
         <div id="header"></div>
         <div id="description"></div>
         <div id="projects"></div>
     </div>
+    
     <script src="js/script.js"></script>
-    <script>
-        // Fetch and include the navbar HTML
-        fetch('/html/navbar.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok: ' + response.statusText);
-                }
-                return response.text();
-            })
-            .then(data => {
-                document.getElementById('navbar-container').innerHTML = data;
-                // Load the navbar script after the navbar is added to the DOM
-                const script = document.createElement('script');
-                script.src = '../js/navbar.js'; // Adjust the path if necessary
-                document.body.appendChild(script);
-            })
-            .catch(error => console.error('Error loading navbar:', error));
-    </script>
+    <script src="js/navbar.js"></script>
 </body>
 </html>

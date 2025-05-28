@@ -1,15 +1,3 @@
-/* START importing JUST Sans Regular font */
-@font-face {
-    font-family: 'JUST Sans Regular';
-    src: url('fonts/JUST Sans Regular.otf') format('otf'),
-         url('fonts/JUST Sans Regular.woff') format('woff'),
-         url('fonts/JUST Sans Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap; /* This helps prevent FOUT (Flash of Unstyled Text) */
-}
-/* END font import */
-
 /* Note "." is prefix for classes and "#" is prefix for ID selector */
 /* ":" are used for pseudo-elements and pseudo-classes primarily */
 
@@ -17,58 +5,147 @@
 :root {
     --primary-color: #055757;
     --secondary-color: #032624;
-    --background-color: rgb(246, 247, 242);
-    --font-color: var(--background-color);
-  }
-/* END global styles */
+    --accent-color: #068080;
+    --background-color: #f6f7f2;
+    --surface-color: #ffffff;
+    --text-primary: #1a1a1a;
+    --text-secondary: #666666;
+    --text-inverse: #ffffff;
+    --shadow-light: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-medium: 0 4px 16px rgba(0,0,0,0.12);
+    --shadow-heavy: 0 8px 32px rgba(0,0,0,0.16);
+    --border-radius: 12px;
+    --transition-fast: 0.2s ease;
+    --transition-medium: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
 
 
-body {
-    font-family: 'JUST Sans Regular', Calibri, Arial, sans-serif;
-    background-color: var(--background-color);
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
+/* END global styles */
 
-.container {
-    width: 60%;
-    margin: 0 auto;
-    padding: 20px;
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     background-color: var(--background-color);
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+    font-size: 1.2rem;
 }
 
-/* START Project class */
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.logo {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-inverse);
+    text-decoration: none;
+    transition: all var(--transition-fast);
+}
+
+.logo:hover {
+    transform: translateY(-2px);
+    text-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+/* START Project class for index.html page*/
 .project {
-    background-color: var(--primary-color);
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 5px;
-    color: var(--font-color);
+    background: var(--surface-color);
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
     display: flex;
-    flex-direction: column;
+    gap: 2rem;
     align-items: flex-start;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+/* creates the nice blue line before */
+.project::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background: linear-gradient(to bottom, var(--primary-color), var(--accent-color));
+    transform: scaleY(0);
+    transition: transform var(--transition-medium);
+}
+
+.project:hover::before {
+    transform: scaleY(1);
+}
+
+.project:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-heavy);
+}
+
+.project:nth-child(even) {
+    flex-direction: row-reverse;
+}
+
+.project-image-container {
+    flex: 0 0 300px;
+    position: relative;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+}
+
+.project-image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
+    transition: all var(--transition-slow);
+}
+
+.project:hover .project-image {
+    transform: scale(1.1);
 }
 
 .project-content {
     flex: 1;
-    width: 100%;
 }
 
 .project h2 {
-    margin-top: 0;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.project p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
 }
 
 .project a {
-    color: var(--font-color);
+    color: var(--primary-color);
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+    margin-right: 1rem;
 }
 
 .project a:hover {
+    color: var(--accent-color);
     text-decoration: underline;
 }
+
 /* END Project class var(--background-color); */
 
 
@@ -129,14 +206,25 @@ body {
 .image-link-container:hover .project-image {
     transform: scale(1.05);
 }
+/* end of image styling */
 
 
-/* headres for title and descroption */
+/* Header Section */
 #header {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 20px;
+    align-items: center;
+    gap: 3rem;
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--surface-color);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-medium);
+}
+
+#header:hover {
+    box-shadow: var(--shadow-medium);
+    transform: translateY(-2px);
 }
 
 #header-content {
@@ -144,103 +232,137 @@ body {
 }
 
 #heading h1 {
+    font-size: 2.5rem;
     color: var(--primary-color);
-    text-align: left;
-    margin-bottom: 10px;
-}
-
-/* for the resume description */
-#description {
-    margin-bottom: 0px;
+    margin-bottom: 1rem;
+    font-weight: 700;
 }
 
 #description p {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
 }
 
-/*for title photo */
-#title-photo {
-    flex: 0 0 auto;
-    margin-left: 20px;
-}
-
-.title-photo {
-    max-width: 150px;
-    height: auto;
-    border-radius: 50%;
-}
-
-/* for portfolio buttons */
 .button-container {
     display: flex;
-    gap: 0px;
-    margin-top: 10px;
+    gap: 1rem;
+    flex-wrap: wrap;
 }
 
 .portfolio-button {
-    display: inline-block;
-    background-color: var(--primary-color);
-    color: var(--font-color);
-    padding: 10px 20px;
-    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: var(--text-inverse);
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius);
     text-decoration: none;
-    margin-right: 20px;
-    transition: background-color 0.3s ease;
-    flex-shrink: 0;
+    font-weight: 500;
+    transition: all var(--transition-medium);
+    position: relative;
+    overflow: hidden;
+}
+
+.portfolio-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+    transition: left var(--transition-medium);
+}
+
+.portfolio-button:hover::before {
+    left: 100%;
 }
 
 .portfolio-button:hover {
-    background-color: var(--primary-color);
-    text-decoration: none;
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-medium);
 }
 
-/* media queries - to help with viewing on phone */
-@media (min-width: 768px) {
-    .project {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: flex-start;
+.title-photo {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid var(--primary-color);
+    transition: all var(--transition-medium);
+}
+
+.title-photo:hover {
+    transform: scale(1.05) rotate(5deg);
+    box-shadow: var(--shadow-heavy);
+}
+
+
+/*FOr mobile*/
+@media (max-width: 768px) {
+    * {
+        font-size: 1rem;
+    }
+    #heading h1 {
+        font-size: 1.5rem;
+    }
+    #description p {
+        font-size: 1.1rem;
     }
 
-    /*flips project view each row */
-    .project:nth-child(even) {
-        flex-direction: row-reverse;
+    #header {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .project {
+        flex-direction: column !important;
     }
 
     .project-image-container {
-        flex: 0 0 calc(45% - 30px); /* Adjust for padding */
-        margin: 0;
-        max-width: calc(45% - 30px);
+        flex: none;
+        width: 100%;
     }
 
-    .project-content {
-        flex: 0 0 50%;
-    }
-}
-
-@media (max-width:  767px) {
-    #header {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    #title-photo {
-        margin-left: 0;
-        margin-top: 20px;
+    .container {
+        padding: 1rem;
     }
 }
 
+/* Smooth scrolling */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Loading animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-in {
+    animation: fadeInUp var(--transition-slow) ease-out;
+}
 
 
 /*For interests_page*/
 .link-item {
-    background-color: var(--primary-color);
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 5px;
     color: var(--font-color);
+    background: var(--surface-color);
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-medium);
+    overflow: hidden;
 }
 
 .link-image {
