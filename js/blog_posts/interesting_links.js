@@ -39,8 +39,6 @@ const linksData = [
  *
  * @return {undefined}
  */
-
-
 function addImageElement(parent, src, alt, className, link_) {
     if (src) {
         const imgContainer = document.createElement('div');

@@ -1,10 +1,10 @@
 // Porfolio data structure for each project, name, description, link and image
 const portfolioData = {
     heading: "Jonathan Shaw - Portfolio",
-    description: `A recent engineering graduate with foundations in computer systems
-    and a passion for software development. Excited by advancements in AI, data analysis and GPU 
-    design I enjoy leveraging my skills in Python, C++, and web technologies,
-    along with my experience in verification, to contribute to innovative software projects. `,
+    description: `Datapath engineer interested in complex systems, systems engineering, and computer architecture.
+    Currently excited about AI inference cloud solutions and GPU developments. I enjoy applying my 
+    skills in software and hardware engineering, combined with critical thinking, to solve complex 
+    technical and business challenges.`,
     cv: "assets/CV_Jonathan_Shaw.pdf",
     github: "https://github.com/JSh4w",
     linkedin: "https://linkedin.com/in/j-m-shaw",

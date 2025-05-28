@@ -45,6 +45,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
+    font-size: 1.2rem;
 }
 
 /* Main Container */
@@ -133,7 +134,7 @@ body {
 .project h2 {
     color: var(--primary-color);
     margin-bottom: 1rem;
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     font-weight: 600;
 }
 
@@ -247,7 +248,7 @@ body {
 }
 
 #description p {
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
 }
@@ -382,11 +383,14 @@ html {
 
 /*For interests_page*/
 .link-item {
-    background-color: var(--primary-color);
-    margin: 20px 0;
-    padding: 20px;
-    border-radius: 5px;
     color: var(--font-color);
+    background: var(--surface-color);
+    margin: 2rem 0;
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-light);
+    transition: all var(--transition-medium);
+    overflow: hidden;
 }
 
 .link-image {
