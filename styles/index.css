@@ -1,15 +1,3 @@
-/* START importing JUST Sans Regular font */
-@font-face {
-    font-family: 'JUST Sans Regular';
-    src: url('fonts/JUST Sans Regular.otf') format('otf'),
-         url('fonts/JUST Sans Regular.woff') format('woff'),
-         url('fonts/JUST Sans Regular.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap; /* This helps prevent FOUT (Flash of Unstyled Text) */
-}
-/* END font import */
-
 /* Note "." is prefix for classes and "#" is prefix for ID selector */
 /* ":" are used for pseudo-elements and pseudo-classes primarily */
 
@@ -31,13 +19,14 @@
     --transition-medium: 0.3s ease;
     --transition-slow: 0.5s ease;
 }
-/* END global styles */
+
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
+/* END global styles */
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -68,7 +57,7 @@ body {
     text-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-/* START Project class */
+/* START Project class for index.html page*/
 .project {
     background: var(--surface-color);
     margin: 2rem 0;
@@ -83,6 +72,7 @@ body {
     overflow: hidden;
 }
 
+/* creates the nice blue line before */
 .project::before {
     content: '';
     position: absolute;
@@ -216,6 +206,7 @@ body {
 .image-link-container:hover .project-image {
     transform: scale(1.05);
 }
+/* end of image styling */
 
 
 /* Header Section */
@@ -309,35 +300,16 @@ body {
 }
 
 
-/* Responsive Design */
+/*FOr mobile*/
 @media (max-width: 768px) {
-    .navbar-toggle {
-        display: block;
+    * {
+        font-size: 1rem;
     }
-
-    .nav-links {
-        position: fixed;
-        top: 80px;
-        left: 0;
-        width: 100%;
-        height: calc(100vh - 80px);
-        background: var(--surface-color);
-        flex-direction: column;
-        justify-content: flex-start;
-        padding-top: 2rem;
-        transform: translateX(-100%);
-        transition: transform var(--transition-medium);
+    #heading h1 {
+        font-size: 1.5rem;
     }
-
-    .nav-links.active {
-        transform: translateX(0);
-    }
-
-    .nav-links a {
-        color: var(--text-primary) !important;
-        width: 100%;
-        text-align: center;
-        padding: 1rem;
+    #description p {
+        font-size: 1.1rem;
     }
 
     #header {
