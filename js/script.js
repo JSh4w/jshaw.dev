@@ -11,13 +11,11 @@ const portfolioData = {
     titlePhoto: "assets/headshot.png",
     projects: [ 
         {
-            name: "Floating Point Arithmetic Tool",
-            description: `When working with floating point signals, debugging of datapath components often comes down to
-             hand calculations. This programme was made to help with quick conversion of variable width floating point 
-             numbers. This project is open source and can be found on github.`,
-            link: "https://jsh4w.github.io/",
-            github: "https://github.com/JSh4w/JSh4w.github.io",
-            image: "assets/float_point_arithmetic_tool.png"
+            name: "FloatVar",
+            description: `A website for displaying variable width floating point values, rounded via RNE. It accepts
+            decimal, hexadecimal and binary toggle inputs. Uses a custom underlying floatXRNE data structure`,
+            link: "https://floatvar.netlify.app/",
+            image: "assets/floatvar.png"
         },
         {
             name: "Python package combining Google Sheets, NLP and Web Scraping",
@@ -28,6 +26,15 @@ const portfolioData = {
             This project is open source and can be found on github.`,
             github: "https://github.com/JSh4w/House_hunter",
             image: "assets/SiteToSheet.png"
+        },
+        {
+            name: "Floating Point Arithmetic Tool",
+            description: `When working with floating point signals, debugging of datapath components often comes down to
+             hand calculations. This programme was made to help with quick conversion of variable width floating point 
+             numbers. This project is open source and can be found on github.`,
+            link: "https://jsh4w.github.io/",
+            github: "https://github.com/JSh4w/JSh4w.github.io",
+            image: "assets/float_point_arithmetic_tool.png"
         },
         {
             name: "Stock analysis MERN application",
@@ -48,13 +55,6 @@ const portfolioData = {
             description:   `4th Year Master's Project on developing molecular devices as an alternative to transistor technology`,
             link: "project_pages/Masters_Thesis_Jonathan_Shaw.pdf",
             image: "project_pages/Masters_Thesis_Jonathan_Shaw.png"
-        },
-        {
-            name: "FloatVar",
-            description: `A website for displaying variable width floating point values, rounded via RNE. It accepts
-            decimal, hexadecimal and binary toggle inputs. Uses a custom underlying floatXRNE data structure`,
-            link: "https://floatvar.netlify.app/",
-            image: "assets/floatvar.png"
         }
     ]
 };
