@@ -238,15 +238,13 @@
         margin: 0;
         border-top: 1px solid #eee;
         width: 100%;
-        left: 0;
-        right: 0;
     }
 
     .nav-links li:hover .dropdown,
     .dropdown.show {
         opacity: 1;
         visibility: visible;
-        display: block;
+        position: relative;
     }
 
     .dropdown li {
