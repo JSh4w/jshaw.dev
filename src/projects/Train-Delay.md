@@ -1,9 +1,9 @@
 ---
 layout: project.njk
-title: "UK Railway Performance Analysis Platform"
+title: "Train Delay Web Application"
 order: 4
 brief: A Python FastAPI backend and React frontend application that analyzes historical UK train performance data with AI-powered insights.
-github: https://github.com/yourusername/trelay
+github: https://github.com/jsh4w/hackathon
 image: /assets/trelay.png
 tags: [react, python, fastapi, openai, sqlite, data-analysis, transportation]
 ---
@@ -32,4 +32,4 @@ for all UK stations, and streaming progress updates for long-running analyses. T
 breakdown shows on-time rates, early arrivals, and various delay buckets to help commuters make       
 informed decisions.
 
-[View Source Code](https://github.com/yourusername/trelay)
+[View Source Code](https://github.com/jsh4w/hackathon)

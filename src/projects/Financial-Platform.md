@@ -4,7 +4,7 @@ title: "Automated Financial Analysis Tool"
 order: 1
 brief: A Python application designed to automate fundamental stock analysis, specifically focusing on Discounted Cash Flow (DCF) valuations using Yahoo Finance data.
 github: https://github.com/JSh4w/financial_analyzer
-image: /assets/financial_analyzer.png
+image: /assets/financial_platform.png
 tags: [python, pandas, yfinance, valuation, finance, data-analysis]
 ---
 
