@@ -3,6 +3,7 @@ layout: project.njk
 title: "Train Delay Web Application"
 order: 4
 brief: A Python FastAPI backend and React frontend application that analyzes historical UK train performance data with AI-powered insights.
+link: https://trelay.netlify.app/
 github: https://github.com/jsh4w/hackathon
 image: /assets/trelay.png
 tags: [react, python, fastapi, openai, sqlite, data-analysis, transportation]
