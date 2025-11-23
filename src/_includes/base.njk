@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if title %}{{ title }} - {% endif %}Jonty's Portfolio</title>
+    <link rel="icon" href="/assets/headshot.png">
+    <link rel="stylesheet" href="/styles/index.css">
+    <link rel="stylesheet" href="/styles/navbar.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container_nav">
+            <a href="/" class="logo">JS</a>
+            <button class="navbar-toggle" id="navToggle">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="/">Home</a></li>
+                <li><a href="https://medium.com/@jshaw0012" target="_blank">Blog</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        {{ content | safe }}
+    </main>
+
+    <script>
+    (function() {
+        const toggleButton = document.querySelector('.navbar-toggle');
+        const navLinks = document.querySelector('.nav-links');
+        if (!toggleButton || !navLinks) return;
+
+        toggleButton.addEventListener('click', (e) => {
+            e.preventDefault();
+            navLinks.classList.toggle('active');
+            toggleButton.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+            const navbar = document.querySelector('#navbar');
+            if (navbar && !navbar.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                toggleButton.classList.remove('active');
+            }
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                navLinks.classList.remove('active');
+                toggleButton.classList.remove('active');
+            }
+        });
+    })();
+    </script>
+</body>
+</html>

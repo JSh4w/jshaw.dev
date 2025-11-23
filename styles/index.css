@@ -34,7 +34,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    font-size: 1.2rem;
+    font-size: 1.0rem;
 }
 
 /* Main Container */
@@ -60,12 +60,12 @@ body {
 /* START Project class for index.html page*/
 .project {
     background: var(--surface-color);
-    margin: 2rem 0;
-    padding: 2rem;
+    margin: 1rem 0;
+    padding: 1.25rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
     display: flex;
-    gap: 2rem;
+    gap: 1.25rem;
     align-items: flex-start;
     transition: all var(--transition-medium);
     position: relative;
@@ -99,22 +99,27 @@ body {
 }
 
 .project-image-container {
-    flex: 0 0 300px;
+    flex: 0 0 320px;
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
+    padding: 8px;
+    background-color: var(--background-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box;
 }
 
 .project-image {
     width: 100%;
-    height: 200px;
+    height: 170px;
     object-fit: cover;
     border-radius: var(--border-radius);
     transition: all var(--transition-slow);
+    display: block;
 }
 
 .project:hover .project-image {
-    transform: scale(1.1);
+    transform: scale(1.05);
 }
 
 .project-content {
@@ -123,14 +128,14 @@ body {
 
 .project h2 {
     color: var(--primary-color);
-    margin-bottom: 1rem;
-    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
     font-weight: 600;
 }
 
 .project p {
     color: var(--text-secondary);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 
 .project a {
@@ -149,71 +154,31 @@ body {
 /* END Project class var(--background-color); */
 
 
-/*image link container for project images*/
-.project-image-container {
-    width: 100%;
-    max-width: 400px;
-    margin: 0 auto 20px;
-    padding: 15px; /* Add padding around the image */
-    background-color: var(--background-color); /* Add a white background */
-    border-radius: 15px; /* Increase border radius for a softer look */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
-    box-sizing: border-box; /* Add padding around the image */
-}
-
-.image-link-container {
-    position: relative;
-    overflow: hidden;
-    border-radius: 10px;
-    width: 100%;
-    height: 100%;
-}
-
-.image-link-container a {
-    display: block;
-    width: 100%;
-    height: 100%;
-    position: relative;
-    z-index: 2;
-}
-
-.image-link-container::after {
+/* Image hover effects */
+.project-image-container::after {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
     background-color: rgba(255, 255, 255, 0.2);
     opacity: 0;
     transition: opacity 0.3s ease;
-    z-index: 1;
+    border-radius: var(--border-radius);
+    pointer-events: none;
 }
 
-.image-link-container:hover::after {
+.project-image-container:hover::after {
     opacity: 1;
 }
-
-.project-image {
-    height: auto;
-    max-width: 100%;
-    object-fit: cover;
-    border-radius: 10px;
-    transition: transform 0.3s ease;
-    display: block; /* Ensure the image is a block element */
-}
-
-.image-link-container:hover .project-image {
-    transform: scale(1.05);
-}
-/* end of image styling */
 
 
 /* Header Section */
 #header {
     display: flex;
-    align-items: center;
-    gap: 3rem;
+    align-items: flex-start;
+    gap: 2rem;
     margin-bottom: 3rem;
     padding: 2rem;
     background: var(--surface-color);
@@ -229,19 +194,27 @@ body {
 
 #header-content {
     flex: 1;
+    min-width: 0;
+}
+
+#title-photo {
+    flex-shrink: 0;
+    align-self: flex-start;
 }
 
 #heading h1 {
-    font-size: 2.5rem;
+    font-size: 2.1rem;
     color: var(--primary-color);
     margin-bottom: 1rem;
     font-weight: 700;
+    line-height: 1.2;
 }
 
 #description p {
-    font-size: 1.2rem;
+    font-size: 1.0rem;
     color: var(--text-secondary);
     margin-bottom: 1.5rem;
+    line-height: 1.6;
 }
 
 .button-container {
@@ -286,17 +259,19 @@ body {
 }
 
 .title-photo {
-    width: 150px;
-    height: 150px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
     object-fit: cover;
-    border: 4px solid var(--primary-color);
+    border: 3px solid var(--primary-color);
     transition: all var(--transition-medium);
+    box-shadow: var(--shadow-light);
 }
 
 .title-photo:hover {
-    transform: scale(1.05) rotate(5deg);
+    transform: scale(1.08);
     box-shadow: var(--shadow-heavy);
+    border-color: var(--accent-color);
 }
 
 
@@ -336,54 +311,92 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Loading animation */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.animate-in {
-    animation: fadeInUp var(--transition-slow) ease-out;
-}
-
-
-/*For interests_page*/
-.link-item {
-    color: var(--font-color);
+/* Project Detail Page */
+.project-detail {
     background: var(--surface-color);
-    margin: 2rem 0;
     padding: 2rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
-    transition: all var(--transition-medium);
+}
+
+.project-detail h1 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.project-hero-image {
+    margin-bottom: 1.5rem;
+    border-radius: var(--border-radius);
     overflow: hidden;
 }
 
-.link-image {
-    padding: 10px;
+.project-detail-image {
     width: 100%;
-    margin: 0 auto 20px;
-    background-color: var(--background-color); /* Add a white background */
-    border-radius: 15px; /* Increase border radius for a softer look */
-    box-sizing: border-box; /* Add padding around the image */
+    max-height: 400px;
+    object-fit: cover;
+    border-radius: var(--border-radius);
 }
 
-.link-item h2 {
-    margin-top: 0;
+.project-detail .project-links {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
-.link-item a {
-    color: var(--font-color);
-    text-decoration: none;
-    font-weight: bold;
+.project-detail .project-content {
+    line-height: 1.8;
 }
 
-.link-item a:hover {
+.project-detail .project-content h2 {
+    color: var(--primary-color);
+    margin: 1.5rem 0 0.75rem;
+    font-size: 1.5rem;
+}
+
+.project-detail .project-content h3 {
+    color: var(--primary-color);
+    margin: 1.25rem 0 0.5rem;
+    font-size: 1.25rem;
+}
+
+.project-detail .project-content p {
+    margin-bottom: 1rem;
+    color: var(--text-secondary);
+}
+
+.project-detail .project-content ul,
+.project-detail .project-content ol {
+    margin: 1rem 0;
+    padding-left: 1.5rem;
+    color: var(--text-secondary);
+}
+
+.project-detail .project-content li {
+    margin-bottom: 0.5rem;
+}
+
+.project-detail .project-content a {
+    color: var(--primary-color);
     text-decoration: underline;
+}
+
+.project-detail .project-content a:hover {
+    color: var(--accent-color);
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 2rem;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+
+.back-link:hover {
+    color: var(--accent-color);
+    transform: translateX(-5px);
 }

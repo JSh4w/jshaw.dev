@@ -1,0 +1,12 @@
+{
+    "name": "jshaw.dev",
+    "version": "1.0.0",
+    "description": "Personal portfolio website",
+    "devDependencies": {
+      "@11ty/eleventy": "^3.1.2"
+    },
+    "scripts": {
+      "build": "eleventy",
+      "start": "eleventy --serve"
+    }
+  }
