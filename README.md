@@ -7,4 +7,9 @@ Now hosted on: https://jsh4w.dev
 
 ### Eleventy help
 This project is made with Eleventy, a static site generator. 
-It is hosted on Netlify
+It is hosted on Netlifyhttps://github.com/JSh4w/jshaw.dev.git
+
+
+
+### Build 
+to build run npm run build
