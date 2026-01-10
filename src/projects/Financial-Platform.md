@@ -8,22 +8,47 @@ image: /assets/financial_platform.png
 tags: [python, DuckDB, PostgreSQL, T212, Alpaca finance, data-analysis]
 ---
 
-# Financial Analyzer Python Application
+A full-stack financial analysis platform that consolidates bank accounts, brokerage portfolios, and real-time market data into a unified dashboard with automated technical analysis and live streaming.
 
-## Architecture Overview
-Languages - Python, Typescript, SQL
-Frameworks/libraries - FastAPI, Vite, React, PostgreSQL, Modal, DuckDB, Azure Containers, Vercel
-API's - Alpaca, Supabase, Trading212, Gocardless, Kraken
+## Features
 
-#### Background:
-The platform aims to provide a completely tailored view of your finances with stock and portfolio analysis. By using gocardless api for bank data, T212 and snaptrade for brokerage accounts the user can view live stock streams and analysis which corresponds to their investment portfolio.
+- **Unified Financial View**: Aggregates data from multiple sources (bank accounts via GoCardless, Trading212, and SnapTrade brokerages)
+- **Live Market Streaming**: Real-time stock data via Alpaca API with Server-Sent Events (SSE) for 1-minute OHLCV updates
+- **Advanced Analytics**:
+  - Sentiment analysis of market news
+  - Hidden Markov Models for market regime detection
+  - Technical indicators including moving averages
+- **Portfolio Tracking**: Live portfolio visualization synchronized with your actual brokerage holdings
+- **Dual Database Architecture**: Fast local DuckDB queries with PostgreSQL persistence
 
-Analysis on stock data is being continually added such as sentiment analysis of market news, Hidden Markov Modelling to profile data into different regimes and simple trackers such as moving average.
+## Tech Stack
 
-The backend acts as the main platform which draws in market data using Alpaca API. It then processes market ticks into live 1-minute OHLCV data which can be accessed via SSE. Data is then stored locally in a DuckDB database in peristent storage and periodically upserted to a PostgreSQL database. Information is accessed via authentication via supabase.
+### Backend
 
-The frontend acts as a way to visualise the live stock information, and gain access to current portfolio data. E.g Trading212 investments as well as current funds in bank accounts.
+- Python & FastAPI
+- DuckDB (local caching)
+- PostgreSQL (persistent storage)
+- Modal (serverless deployment)
+- Azure Containers
 
+### Frontend
 
+- React & TypeScript
+- Vite
+- Deployed on Vercel
+
+### APIs & Integration
+
+- Alpaca (market data)
+- GoCardless (banking)
+- Trading212 & SnapTrade (brokerages)
+- Supabase (authentication)
+- Kraken (crypto data)
+
+## Architecture
+
+The backend processes live market ticks from Alpaca API, transforms them into 1-minute OHLCV bars, and streams updates via SSE. Market data flows through a two-tier storage system where DuckDB handles high-speed local queries while PostgreSQL maintains persistent historical records with periodic upserts.
+
+The frontend provides real-time visualization of market movements, synchronized portfolio positions, and connected bank account balances in a single interface.
 
 [View Source Code](https://github.com/JSh4w/financial_analyzer)
