@@ -10,18 +10,9 @@ tags: [research, nanotechnology, quantum-mechanics]
 
 Master's thesis investigating molecular electronics as a path beyond silicon scaling limits.
 
-## The Silicon Challenge
-
-As traditional silicon transistors approach physical limits, molecular electronics offers a promising alternative:
-- **Moore's Law Limitations**: Transistor scaling facing quantum effects and heat dissipation issues
-- **Economic Constraints**: Exponentially increasing fabrication costs for smaller nodes
-
-## Molecular Electronics Promise
-
-- **Ultimate Miniaturization**: Single/multi-molecule devices at the atomic scale
-- **Quantum Properties**: Leveraging quantum mechanical effects for novel functionality
-- **Self-Assembly**: Potential for bottom-up manufacturing approaches
-- **Material Diversity**: Vast chemical space for device optimization
+The thesis focus is on an alternative to transistor technology. The main research is around the use of asymetric organic molecules that can be used to form diodes and in turn logic circuits.
+The biggest issue with this technique is the fabrication methods.
+My thesis aimed to explore the use of Helium ion beam microscopy for nano-wire formation and nano-junction formation such that consistent organic molecule deposits could be made to form systems with assymetric electric characteristsis.
 
 ## Research Focus
 

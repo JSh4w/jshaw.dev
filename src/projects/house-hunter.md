@@ -14,7 +14,7 @@ Python package that automates property research by scraping listings and outputt
 
 - **Smart Web Scraping**: Rate-limited requests respecting robots.txt with robust error handling
 - **NLP Processing**: Extracts and standardizes information from varied listing formats
-- **Google Sheets Integration**: Direct output to user-defined spreadsheet structures
+- **Google Sheets Integration**: Direct output to user-defined google sheets structures
 - **Location Intelligence**: Google Distance Matrix API integration for commute time calculations
 
 ## Tech Stack

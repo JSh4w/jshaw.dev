@@ -12,16 +12,4 @@ Full-stack stock viewing platform built to overcome limitations of existing prov
 
 ## Motivation
 
-Existing platforms had frustrating limitations: Trading212's restricted candle formats, Interactive Brokers' slow loading and authentication. Built my own solution to have more control over data visualization.
-
-## Architecture
-
-- **Frontend**: React.js
-- **Backend**: Node.js & Express.js
-- **Database**: MongoDB
-
-## Technical Notes
-
-Used API requests rather than WebSockets for simplicity. Implemented a Kalman filter for next-day price prediction - surprisingly effective despite limited knowledge of the underlying system dynamics.
-
-A learning project for JavaScript and full-stack development.
+An initial development into viewing and handling stock data. I made an attempt to use Kalman Filtering on data supplied by Alpha Vantage but quickly ran into limitations. 
