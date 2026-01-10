@@ -9,7 +9,7 @@ title: Home
             <h1>Jonathan Shaw - Portfolio</h1>
         </div>
         <div id="description">
-            <p>Datapath engineer interested in complex systems, systems engineering, and computer architecture. Currently excited about AI inference cloud solutions and GPU developments. I enjoy applying my skills in software and hardware engineering, combined with critical thinking, to solve complex technical and business challenges.</p>
+            <p>Engineer @ imagination Technologies. Working on Datapath, Infrastructure, Internal Tools, Modelling, Verification & more. Interested in complex systems, systems engineering, and computer architecture. Currently excited about AI inference cloud solutions and GPU developments</p>
             <div class="button-container">
                 <a href="/assets/CV_Jonathan_Shaw.pdf" target="_blank" class="portfolio-button">Resume</a>
                 <a href="https://github.com/JSh4w" target="_blank" class="portfolio-button">Github</a>
