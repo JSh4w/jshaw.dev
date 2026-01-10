@@ -34,7 +34,7 @@ body {
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    font-size: 1.0rem;
+    font-size: 1.05rem;
 }
 
 /* Main Container */
@@ -60,7 +60,7 @@ body {
 /* START Project class for index.html page*/
 .project {
     background: var(--surface-color);
-    margin: 1rem 0;
+    margin: 0.5rem 0;
     padding: 1.25rem;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow-light);
@@ -103,10 +103,6 @@ body {
     position: relative;
     overflow: hidden;
     border-radius: var(--border-radius);
-    padding: 8px;
-    background-color: var(--background-color);
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    box-sizing: border-box;
 }
 
 .project-image {
@@ -130,7 +126,7 @@ body {
     color: var(--primary-color);
     margin-bottom: 0.5rem;
     font-size: 1.1rem;
-    font-weight: 600;
+    font-weight: 700;
 }
 
 .project p {
@@ -158,10 +154,10 @@ body {
 .project-image-container::after {
     content: '';
     position: absolute;
-    top: 15px;
-    left: 15px;
-    right: 15px;
-    bottom: 15px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background-color: rgba(255, 255, 255, 0.2);
     opacity: 0;
     transition: opacity 0.3s ease;
@@ -323,7 +319,7 @@ html {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     font-size: 2rem;
-    font-weight: 700;
+    font-weight: 800;
 }
 
 .project-hero-image {
