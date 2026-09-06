@@ -6,7 +6,7 @@ title: Home
 <section class="page hero" id="top">
   <div>
     <h1>Jonathan Shaw</h1>
-    <p class="hero-intro">Engineer @ Imagination Technologies. Working on Datapath, Infrastructure, Internal Tools, Modelling, Verification &amp; more. Interested in complex systems, systems engineering, and computer architecture. Currently excited about AI inference cloud solutions and GPU developments.</p>
+    <p class="hero-intro">Engineer @ <a href="https://anqa.ai" target="_blank">Anqa</a>, working on multi-user complex workflows. Previously worked on GPUs @ <a href="https://www.imaginationtech.com" target="_blank">Imagination</a> on the Datapath team, doing critical path modelling and verification. Currently interested in AI &amp; HPC chips, as well as post-training AI optimisations.</p>
     <div class="hero-links">
       <a href="/assets/Curriculum_Vitae_Jonathan_Shaw_2025.pdf" target="_blank" class="label">Resume</a>
       <a href="https://github.com/JSh4w" target="_blank" class="label">Github</a>
