@@ -20,14 +20,17 @@ code is written against web APIs (`fetch`, `crypto.subtle`).
 - `migrations/0001_init.sql` — the schema. Just `oauth_tokens`.
 - `src/index.js` — the router. Every route requires a valid Access identity.
 - `src/access.js` — verifies the JWT that Access attaches to each request.
-- `src/pages.js` — the small server-rendered HTML pages.
+- `src/pages.js` — the shared layout (sidebar plus content) and each page.
+- `src/projects.js` — the project links shown on the Projects tab. Edit this
+  file to add a project or fill in a missing deployment URL.
 
 ### Routes
 | Path | Purpose |
 | --- | --- |
-| `/` | Confirms who you are signed in as. |
-| `/logout` | Ends the Cloudflare Access session. |
+| `/projects` | Links for each project: GitHub, deployments, docs, key tech. |
+| `/todo` | Placeholder until the list is stored in D1. |
 | `/calendar` | Placeholder until the calendar source is chosen. |
+| `/logout` | Ends the Cloudflare Access session. |
 
 ### Setup
 ```
