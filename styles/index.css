@@ -121,7 +121,7 @@ img { display: block; max-width: 100%; }
 
 .hero h1 {
   font-weight: 800;
-  font-size: clamp(34px, 5vw, 60px);
+  font-size: clamp(23px, 5vw, 60px);
   line-height: 1.04;
   letter-spacing: -0.02em;
   margin-bottom: 18px;
@@ -324,14 +324,21 @@ img { display: block; max-width: 100%; }
 @media (max-width: 760px) {
   :root { --gutter: 20px; }
 
+  /* The hero keeps its two columns at every width: the headshot sits beside
+     the text rather than stacking above it. Only the spacing tightens. */
   .hero {
-    grid-template-columns: 1fr;
-    gap: 28px;
-    padding-top: 36px;
+    gap: 20px;
+    padding-top: 32px;
+    padding-bottom: 32px;
   }
 
-  /* Photo above the text reads better once stacked. */
-  .hero-photo { order: -1; }
+  .hero-intro {
+    font-size: 15px;
+    margin-bottom: 18px;
+  }
+
+  .hero-links { gap: 12px; }
+  .hero-photo { padding: 10px; }
 
   .project {
     grid-template-columns: 1fr;
@@ -343,4 +350,20 @@ img { display: block; max-width: 100%; }
     align-items: flex-start;
     gap: 4px;
   }
+}
+
+/* Very narrow phones. The hero columns stay side by side but the photo gives
+   up more of the width, so the text keeps a readable measure. */
+@media (max-width: 420px) {
+  :root { --gutter: 16px; }
+
+  .hero {
+    grid-template-columns: minmax(0, 1.9fr) minmax(0, 0.8fr);
+    gap: 14px;
+  }
+
+  .hero h1 { margin-bottom: 12px; }
+  .hero-intro { font-size: 14px; }
+  .hero-photo { padding: 7px; }
+  .label { font-size: 11px; }
 }
