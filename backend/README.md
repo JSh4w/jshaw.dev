@@ -20,17 +20,14 @@ code is written against web APIs (`fetch`, `crypto.subtle`).
 - `migrations/0001_init.sql` — the schema. Just `oauth_tokens`.
 - `src/index.js` — the router. Every route requires a valid Access identity.
 - `src/access.js` — verifies the JWT that Access attaches to each request.
-- `src/google.js` — Google OAuth exchange, token refresh, calendar fetch.
 - `src/pages.js` — the small server-rendered HTML pages.
 
 ### Routes
 | Path | Purpose |
 | --- | --- |
+| `/` | Confirms who you are signed in as. |
 | `/logout` | Ends the Cloudflare Access session. |
-| `/auth/google` | Starts Google consent. |
-| `/auth/google/callback` | Stores the refresh token. |
-| `/calendar` | Upcoming events, rendered. |
-| `/api/calendar` | The same data as JSON. |
+| `/calendar` | Placeholder until the calendar source is chosen. |
 
 ### Setup
 ```

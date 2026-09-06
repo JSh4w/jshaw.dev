@@ -55,38 +55,13 @@ export function helloPage(email) {
   `);
 }
 
-export function calendarPage(events, connected, email) {
-  if (!connected) {
-    return html("Calendar", `
-      <h1>Calendar</h1>
-      <p class="muted">No Google account connected yet.</p>
-      <p><a href="/auth/google">Connect Google Calendar</a></p>
-      <p><a href="/logout">Sign out</a></p>
-    `);
-  }
-  const items = events.length
-    ? events.map((event) => `
-        <li>
-          <strong>${escapeHtml(event.summary)}</strong>
-          <time>${escapeHtml(formatDate(event.start))}</time>
-          ${event.location ? `<span class="muted">${escapeHtml(event.location)}</span>` : ""}
-        </li>`).join("")
-    : `<li class="muted">Nothing upcoming.</li>`;
-
+export function calendarPage(email) {
   return html("Calendar", `
-    <h1>Upcoming</h1>
-    <ul>${items}</ul>
-    <p class="muted">Signed in as ${escapeHtml(email || "unknown")}. <a href="/logout">Sign out</a></p>
+    <h1>Calendar</h1>
+    <p class="muted">Not connected yet. The Apple calendar source still needs
+    choosing: a published ICS feed, or CalDAV with an app-specific password.</p>
+    <p><a href="/">Back</a></p>
   `);
-}
-
-function formatDate(value) {
-  if (!value) return "";
-  const date = new Date(value);
-  const allDay = !value.includes("T");
-  return date.toLocaleString("en-GB", allDay
-    ? { weekday: "short", day: "numeric", month: "short" }
-    : { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" });
 }
 
 function escapeHtml(value) {
