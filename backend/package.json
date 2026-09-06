@@ -1,0 +1,16 @@
+{
+  "name": "jshaw.dev-backend",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Authenticated backend for jsh4w.dev",
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "db:init": "wrangler d1 execute jshaw --remote --file=./migrations/0001_init.sql",
+    "db:init:local": "wrangler d1 execute jshaw --local --file=./migrations/0001_init.sql"
+  },
+  "devDependencies": {
+    "wrangler": "^4.129.0"
+  }
+}

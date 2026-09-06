@@ -1,0 +1,31 @@
+name = "jshaw-dev-backend"
+main = "src/index.js"
+compatibility_date = "2025-01-01"
+
+# Serves the backend from app.jsh4w.dev once the domain is added to Cloudflare.
+# Comment this out until the DNS record exists, or the first deploy will fail.
+# [[routes]]
+# pattern = "app.jsh4w.dev"
+# custom_domain = true
+
+[[d1_databases]]
+binding = "DB"
+database_name = "jshaw"
+
+database_id = "1d8f16f3-9c3d-423c-b0ca-d9550b9e0559"
+
+# Refreshes stored OAuth tokens before they expire.
+[triggers]
+crons = ["0 */6 * * *"]
+
+[vars]
+SITE_URL = "https://jsh4w.dev"
+# Zero Trust team domain, e.g. "jsh4w.cloudflareaccess.com"
+ACCESS_TEAM_DOMAIN = "curly-wind-fe5d.cloudflareaccess.com"
+# The Access application's Audience (AUD) tag, from its Overview tab.
+ACCESS_AUD = "12b135b12b06dd58ff1924266b6c4bf3d30aa5df0a778b6e427e564a4570d6ff"
+
+# Secrets are NOT set here. Set them with wrangler secret put <NAME>:
+#   STATE_SECRET         long random string used to sign the OAuth state param
+#   GOOGLE_CLIENT_ID     from Google Cloud console
+#   GOOGLE_CLIENT_SECRET from Google Cloud console
