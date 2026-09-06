@@ -1,6 +1,7 @@
 import { getIdentity } from "./access.js";
 import { page, projectsPage, hostingPage, todoPage, calendarPage, deniedPage } from "./pages.js";
 import { listSites } from "./netlify.js";
+import { listServices } from "./render.js";
 
 export default {
   async fetch(request, env) {
@@ -15,12 +16,19 @@ export default {
       case "/projects":
         return projectsPage();
 
+      // Both providers are fetched together; one failing does not hide the other.
       case "/hosting": {
-        try {
-          return hostingPage(await listSites(env), null);
-        } catch (error) {
-          return hostingPage(null, error.message);
-        }
+        const [netlify, render] = await Promise.allSettled([
+          listSites(env), listServices(env)
+        ]);
+        return hostingPage({
+          netlify: netlify.status === "fulfilled" ? netlify.value : null,
+          render: render.status === "fulfilled" ? render.value : null,
+          errors: {
+            netlify: netlify.status === "rejected" ? netlify.reason.message : null,
+            render: render.status === "rejected" ? render.reason.message : null
+          }
+        });
       }
 
       case "/todo":

@@ -62,6 +62,9 @@ function layout(title, current, body) {
   nav .foot { margin-top: auto; font-size: 11px; }
   main { flex: 1; padding: 24px 28px; max-width: 900px; }
   h1 { font-size: 1.25rem; margin: 0 0 20px; font-weight: 600; }
+  h2 { font-size: 0.8rem; margin: 28px 0 4px; font-weight: 600; letter-spacing: 0.08em;
+       text-transform: uppercase; color: var(--muted); }
+  h2:first-of-type { margin-top: 0; }
   a { color: var(--teal); }
   .muted { color: var(--muted); font-size: 13px; }
   ul.rows { list-style: none; margin: 0; padding: 0; }
@@ -114,35 +117,43 @@ export function projectsPage() {
   return page("Projects", "/projects", `<h1>Projects</h1><ul class="rows">${rows}</ul>`);
 }
 
-export function hostingPage(sites, error) {
+export function hostingPage({ netlify, render, errors }) {
+  const sections = [
+    hostingSection("Netlify", netlify, errors.netlify, "NETLIFY_TOKEN",
+      "https://app.netlify.com/user/applications", (site) => site.published
+        ? "published " + formatDate(site.published) : "never published"),
+    hostingSection("Render", render, errors.render, "RENDER_TOKEN",
+      "https://dashboard.render.com/u/settings#api-keys", (service) =>
+        [service.runtime, service.region,
+         service.updated && "updated " + formatDate(service.updated)]
+          .filter(Boolean).join(" \u00b7 "))
+  ].join("");
+
+  return page("Hosting", "/hosting", `<h1>Hosting</h1>${sections}`);
+}
+
+// One provider's block: a heading, then either its rows or why there are none.
+function hostingSection(title, rows, error, secret, tokenUrl, meta) {
+  let body;
   if (error) {
-    return page("Hosting", "/hosting",
-      `<h1>Hosting</h1><p class="muted">${escapeHtml(error)}</p>`);
-  }
-  if (sites === null) {
-    return page("Hosting", "/hosting", `
-      <h1>Hosting</h1>
-      <p class="muted">No Netlify token set. Create one at
-      <a href="https://app.netlify.com/user/applications">app.netlify.com/user/applications</a>,
-      then run <code>npx wrangler secret put NETLIFY_TOKEN</code>.</p>
-    `);
-  }
-
-  const rows = sites.map((site) => `<li>
-      <div class="name">${escapeHtml(site.name)}</div>
+    body = `<p class="muted">${escapeHtml(error)}</p>`;
+  } else if (rows === null) {
+    body = `<p class="muted">No token set. Create one at
+      <a href="${tokenUrl}">${escapeHtml(new URL(tokenUrl).hostname)}</a>,
+      then run <code>npx wrangler secret put ${secret}</code>.</p>`;
+  } else {
+    body = `<ul class="rows">${rows.map((row) => `<li>
+      <div class="name">${escapeHtml(row.name)}</div>
       <div class="links">
-        <a href="${site.url}">Site</a>
-        <a href="${site.admin}">Dashboard</a>
-        ${site.repo ? `<a href="${site.repo}">Repo</a>` : ""}
+        ${row.url ? `<a href="${row.url}">Live</a>` : ""}
+        <a href="${row.admin}">Dashboard</a>
+        ${row.repo ? `<a href="${row.repo}">Repo</a>` : ""}
       </div>
-      <div class="tech">${site.published
-        ? "published " + escapeHtml(formatDate(site.published))
-        : "never published"}</div>
-    </li>`).join("");
+      <div class="tech">${escapeHtml(meta(row))}</div>
+    </li>`).join("")}</ul>`;
+  }
 
-  return page("Hosting", "/hosting",
-    `<h1>Hosting</h1><p class="muted">${sites.length} Netlify sites, live from the API.</p>
-     <ul class="rows">${rows}</ul>`);
+  return `<h2>${title}</h2>${body}`;
 }
 
 function formatDate(value) {
