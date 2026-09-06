@@ -2,33 +2,25 @@
 layout: base.njk
 ---
 
-<article class="project-detail">
+<article class="page project-detail">
   <h1>{{ title }}</h1>
 
   {% if image %}
-  <div class="project-hero-image">
-    {% if link %}
-      <a href="{{ link }}" target="_blank">
-        <img src="{{ image }}" alt="{{ title }} preview" class="project-detail-image">
-      </a>
-    {% else %}
-      <img src="{{ image }}" alt="{{ title }} preview" class="project-detail-image">
-    {% endif %}
-  </div>
+  <img src="{{ image }}" alt="{{ title }}" class="project-detail-image">
   {% endif %}
 
   <div class="project-links">
     {% if link %}
-      <a href="{{ link }}" target="_blank" class="portfolio-button">View Project</a>
+    <a href="{{ link }}" target="_blank" class="label is-live">Live</a>
     {% endif %}
     {% if github %}
-      <a href="{{ github }}" target="_blank" class="portfolio-button">View on GitHub</a>
+    <a href="{{ github }}" target="_blank" class="label">Source</a>
     {% endif %}
   </div>
 
-  <div class="project-content">
+  <div class="prose">
     {{ content | safe }}
   </div>
 
-  <a href="/" class="back-link">← Back to Portfolio</a>
+  <a href="/#work" class="back-link label">← Back to work</a>
 </article>
