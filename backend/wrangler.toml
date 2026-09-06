@@ -20,6 +20,8 @@ SITE_URL = "https://jsh4w.dev"
 ACCESS_TEAM_DOMAIN = "curly-wind-fe5d.cloudflareaccess.com"
 # The Access application's Audience (AUD) tag, from its Overview tab.
 ACCESS_AUD = "12b135b12b06dd58ff1924266b6c4bf3d30aa5df0a778b6e427e564a4570d6ff"
+# Vercel account slug, used to build dashboard links.
+VERCEL_SLUG = "jsh4ws-projects"
 
 # No secrets are needed yet. Cloudflare Access handles logging in, and the
 # calendar source has not been chosen. Set any future ones with:

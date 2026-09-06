@@ -2,6 +2,7 @@ import { getIdentity } from "./access.js";
 import { page, projectsPage, hostingPage, todoPage, calendarPage, deniedPage } from "./pages.js";
 import { listSites } from "./netlify.js";
 import { listServices } from "./render.js";
+import { listProjects } from "./vercel.js";
 
 export default {
   async fetch(request, env) {
@@ -18,15 +19,17 @@ export default {
 
       // Both providers are fetched together; one failing does not hide the other.
       case "/hosting": {
-        const [netlify, render] = await Promise.allSettled([
-          listSites(env), listServices(env)
+        const [netlify, render, vercel] = await Promise.allSettled([
+          listSites(env), listServices(env), listProjects(env)
         ]);
         return hostingPage({
           netlify: netlify.status === "fulfilled" ? netlify.value : null,
           render: render.status === "fulfilled" ? render.value : null,
+          vercel: vercel.status === "fulfilled" ? vercel.value : null,
           errors: {
             netlify: netlify.status === "rejected" ? netlify.reason.message : null,
-            render: render.status === "rejected" ? render.reason.message : null
+            render: render.status === "rejected" ? render.reason.message : null,
+            vercel: vercel.status === "rejected" ? vercel.reason.message : null
           }
         });
       }

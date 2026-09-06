@@ -25,12 +25,13 @@ code is written against web APIs (`fetch`, `crypto.subtle`).
   file to add a project or fill in a missing hosting URL.
 - `src/netlify.js` — calls the Netlify API for the Hosting tab.
 - `src/render.js` — calls the Render API for the same tab.
+- `src/vercel.js` — calls the Vercel API for the same tab.
 
 ### Routes
 | Path | Purpose |
 | --- | --- |
 | `/projects` | Links for each project: GitHub, deployments, docs, key tech. |
-| `/hosting` | Netlify sites and Render services, read live from their APIs. |
+| `/hosting` | Netlify, Render and Vercel deployments, read live from their APIs. |
 | `/todo` | Placeholder until the list is stored in D1. |
 | `/calendar` | Placeholder until the calendar source is chosen. |
 | `/logout` | Ends the Cloudflare Access session. |

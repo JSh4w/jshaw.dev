@@ -117,7 +117,7 @@ export function projectsPage() {
   return page("Projects", "/projects", `<h1>Projects</h1><ul class="rows">${rows}</ul>`);
 }
 
-export function hostingPage({ netlify, render, errors }) {
+export function hostingPage({ netlify, render, vercel, errors }) {
   const sections = [
     hostingSection("Netlify", netlify, errors.netlify, "NETLIFY_TOKEN",
       "https://app.netlify.com/user/applications", (site) => site.published
@@ -126,7 +126,11 @@ export function hostingPage({ netlify, render, errors }) {
       "https://dashboard.render.com/u/settings#api-keys", (service) =>
         [service.runtime, service.region,
          service.updated && "updated " + formatDate(service.updated)]
-          .filter(Boolean).join(" \u00b7 "))
+          .filter(Boolean).join(" \u00b7 ")),
+    hostingSection("Vercel", vercel, errors.vercel, "VERCEL_TOKEN",
+      "https://vercel.com/account/tokens", (project) =>
+        [project.runtime, project.updated && "deployed " + formatDate(project.updated)]
+          .filter(Boolean).join(" \u00b7 ") || "no production deployment")
   ].join("");
 
   return page("Hosting", "/hosting", `<h1>Hosting</h1>${sections}`);
