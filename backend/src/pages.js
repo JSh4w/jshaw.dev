@@ -68,10 +68,37 @@ function layout(title, current, body) {
   a { color: var(--teal); }
   .muted { color: var(--muted); font-size: 13px; }
   ul.rows { list-style: none; margin: 0; padding: 0; }
-  ul.rows > li { padding: 14px 0; border-top: 1px solid var(--rule); }
-  .name { font-weight: 600; margin-bottom: 4px; }
-  .links { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; }
-  .tech { font-family: ui-monospace, Menlo, monospace; font-size: 11px; color: var(--muted); margin-top: 4px; }
+  ul.rows > li {
+    padding: 6px 0;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 6px 14px;
+  }
+  .name { font-weight: 600; }
+  .links { display: flex; flex-wrap: wrap; gap: 12px; font-size: 13px; }
+  .tech {
+    font-family: ui-monospace, Menlo, monospace;
+    font-size: 11px;
+    color: var(--muted);
+    margin-left: auto;
+    text-align: right;
+  }
+  input[type=search] {
+    width: 100%;
+    max-width: 280px;
+    margin-bottom: 14px;
+    padding: 6px 9px;
+    font: inherit;
+    font-size: 13px;
+    color: inherit;
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 3px;
+  }
+  input[type=search]:focus { outline: 1px solid var(--teal); border-color: var(--teal); }
+  li[hidden] { display: none; }
   @media (max-width: 600px) {
     body { display: block; }
     nav { flex-direction: row; border-right: 0; border-bottom: 1px solid var(--rule); padding: 8px; }
@@ -82,6 +109,20 @@ function layout(title, current, body) {
 <body>
 <nav>${nav}<a class="foot" href="/logout">Sign out</a></nav>
 <main>${body}</main>
+<script>
+  // Filters rows in place. The only script on the page; without it the search
+  // box does nothing and every row stays visible.
+  var box = document.querySelector("input[type=search]");
+  if (box) {
+    var rows = Array.prototype.slice.call(document.querySelectorAll("ul.rows > li"));
+    box.addEventListener("input", function () {
+      var term = box.value.trim().toLowerCase();
+      rows.forEach(function (row) {
+        row.hidden = term !== "" && row.textContent.toLowerCase().indexOf(term) === -1;
+      });
+    });
+  }
+</script>
 </body>
 </html>`;
 }
@@ -100,21 +141,22 @@ export function deniedPage() {
 export function projectsPage() {
   const rows = projects.map((project) => {
     const links = [
-      project.site && `<a href="${attr(project.site)}">Site</a>`,
-      project.github && `<a href="${attr(project.github)}">GitHub</a>`,
-      project.frontend && `<a href="${attr(project.frontend)}">Frontend host</a>`,
-      project.backend && `<a href="${attr(project.backend)}">Backend host</a>`,
-      project.docs && `<a href="${attr(project.docs)}">Docs</a>`
+      project.site && ext(project.site, "Site"),
+      project.github && ext(project.github, "GitHub"),
+      project.frontend && ext(project.frontend, "Frontend host"),
+      project.backend && ext(project.backend, "Backend host"),
+      project.docs && ext(project.docs, "Docs")
     ].filter(Boolean).join("");
 
     return `<li>
-      <div class="name">${escapeHtml(project.name)}</div>
-      <div class="links">${links || '<span class="muted">no links</span>'}</div>
-      ${project.tech.length ? `<div class="tech">${escapeHtml(project.tech.join(" · "))}</div>` : ""}
+      <span class="name">${escapeHtml(project.name)}</span>
+      <span class="links">${links || '<span class="muted">no links</span>'}</span>
+      ${project.tech.length ? `<span class="tech">${escapeHtml(project.tech.join(" · "))}</span>` : ""}
     </li>`;
   }).join("");
 
-  return page("Projects", "/projects", `<h1>Projects</h1><ul class="rows">${rows}</ul>`);
+  return page("Projects", "/projects",
+    `<h1>Projects</h1>${searchBox("Filter projects")}<ul class="rows">${rows}</ul>`);
 }
 
 export function hostingPage({ netlify, render, vercel, errors }) {
@@ -133,7 +175,8 @@ export function hostingPage({ netlify, render, vercel, errors }) {
           .filter(Boolean).join(" \u00b7 ") || "no production deployment")
   ].join("");
 
-  return page("Hosting", "/hosting", `<h1>Hosting</h1>${sections}`);
+  return page("Hosting", "/hosting",
+    `<h1>Hosting</h1>${searchBox("Filter deployments")}${sections}`);
 }
 
 // One provider's block: a heading, then either its rows or why there are none.
@@ -147,17 +190,21 @@ function hostingSection(title, rows, error, secret, tokenUrl, meta) {
       then run <code>npx wrangler secret put ${secret}</code>.</p>`;
   } else {
     body = `<ul class="rows">${rows.map((row) => `<li>
-      <div class="name">${escapeHtml(row.name)}</div>
-      <div class="links">
-        ${row.url ? `<a href="${attr(row.url)}">Live</a>` : ""}
-        ${row.admin ? `<a href="${attr(row.admin)}">Dashboard</a>` : ""}
-        ${row.repo ? `<a href="${attr(row.repo)}">Repo</a>` : ""}
-      </div>
-      <div class="tech">${escapeHtml(meta(row))}</div>
+      <span class="name">${escapeHtml(row.name)}</span>
+      <span class="links">
+        ${row.url ? ext(row.url, "Live") : ""}
+        ${row.admin ? ext(row.admin, "Dashboard") : ""}
+        ${row.repo ? ext(row.repo, "Repo") : ""}
+      </span>
+      <span class="tech">${escapeHtml(meta(row))}</span>
     </li>`).join("")}</ul>`;
   }
 
   return `<h2>${title}</h2>${body}`;
+}
+
+function searchBox(placeholder) {
+  return `<input type="search" placeholder="${placeholder}" autocomplete="off" spellcheck="false">`;
 }
 
 function formatDate(value) {
@@ -179,6 +226,15 @@ export function calendarPage() {
     <p class="muted">Not connected. The Apple calendar source still needs
     choosing: a published ICS feed, or CalDAV with an app-specific password.</p>
   `);
+}
+
+// An external link: new tab, and rel=noopener so the opened page cannot reach
+// back into this one through window.opener.
+function ext(url, label) {
+  const href = attr(url);
+  return href
+    ? `<a href="${href}" target="_blank" rel="noopener noreferrer">${escapeHtml(label)}</a>`
+    : "";
 }
 
 // Only http(s) URLs are emitted, so a javascript: or data: value coming back
