@@ -39,7 +39,7 @@ export const projects = [
   {
     name: "FloatVar",
     site: "https://floatvar.netlify.app/",
-    frontend: null,
+    frontend: "https://app.netlify.com/projects/floatvar/overview",
     backend: null,
     github: null,
     docs: "https://jsh4w.dev/projects/floatvar/",
@@ -57,7 +57,7 @@ export const projects = [
   {
     name: "Train Delay Web Application",
     site: "https://trelay.netlify.app/",
-    frontend: null,
+    frontend: "https://app.netlify.com/projects/trelay/overview",
     backend: null,
     github: "https://github.com/jsh4w/hackathon",
     docs: "https://jsh4w.dev/projects/Train-Delay/",

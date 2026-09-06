@@ -5,6 +5,7 @@ import { projects } from "./projects.js";
 
 const NAV = [
   { href: "/projects", label: "Projects" },
+  { href: "/hosting", label: "Hosting" },
   { href: "/todo", label: "To-do" },
   { href: "/calendar", label: "Calendar" }
 ];
@@ -111,6 +112,42 @@ export function projectsPage() {
   }).join("");
 
   return page("Projects", "/projects", `<h1>Projects</h1><ul class="rows">${rows}</ul>`);
+}
+
+export function hostingPage(sites, error) {
+  if (error) {
+    return page("Hosting", "/hosting",
+      `<h1>Hosting</h1><p class="muted">${escapeHtml(error)}</p>`);
+  }
+  if (sites === null) {
+    return page("Hosting", "/hosting", `
+      <h1>Hosting</h1>
+      <p class="muted">No Netlify token set. Create one at
+      <a href="https://app.netlify.com/user/applications">app.netlify.com/user/applications</a>,
+      then run <code>npx wrangler secret put NETLIFY_TOKEN</code>.</p>
+    `);
+  }
+
+  const rows = sites.map((site) => `<li>
+      <div class="name">${escapeHtml(site.name)}</div>
+      <div class="links">
+        <a href="${site.url}">Site</a>
+        <a href="${site.admin}">Dashboard</a>
+        ${site.repo ? `<a href="${site.repo}">Repo</a>` : ""}
+      </div>
+      <div class="tech">${site.published
+        ? "published " + escapeHtml(formatDate(site.published))
+        : "never published"}</div>
+    </li>`).join("");
+
+  return page("Hosting", "/hosting",
+    `<h1>Hosting</h1><p class="muted">${sites.length} Netlify sites, live from the API.</p>
+     <ul class="rows">${rows}</ul>`);
+}
+
+function formatDate(value) {
+  return new Date(value).toLocaleDateString("en-GB",
+    { day: "numeric", month: "short", year: "numeric" });
 }
 
 export function todoPage() {

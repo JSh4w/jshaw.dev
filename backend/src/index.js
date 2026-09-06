@@ -1,5 +1,6 @@
 import { getIdentity } from "./access.js";
-import { page, projectsPage, todoPage, calendarPage, deniedPage } from "./pages.js";
+import { page, projectsPage, hostingPage, todoPage, calendarPage, deniedPage } from "./pages.js";
+import { listSites } from "./netlify.js";
 
 export default {
   async fetch(request, env) {
@@ -13,6 +14,14 @@ export default {
       case "/":
       case "/projects":
         return projectsPage();
+
+      case "/hosting": {
+        try {
+          return hostingPage(await listSites(env), null);
+        } catch (error) {
+          return hostingPage(null, error.message);
+        }
+      }
 
       case "/todo":
         return todoPage();
