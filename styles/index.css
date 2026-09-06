@@ -114,7 +114,8 @@ img { display: block; max-width: 100%; }
   padding-top: 56px;
   padding-bottom: 48px;
   display: grid;
-  grid-template-columns: minmax(0, 1.55fr) minmax(0, 0.85fr);
+  /* Photo takes 30% of the row; text the rest. */
+  grid-template-columns: minmax(0, 7fr) minmax(0, 3fr);
   gap: 40px;
   align-items: start;
 }
@@ -358,7 +359,7 @@ img { display: block; max-width: 100%; }
   :root { --gutter: 16px; }
 
   .hero {
-    grid-template-columns: minmax(0, 1.9fr) minmax(0, 0.8fr);
+    grid-template-columns: minmax(0, 3fr) minmax(0, 1fr);
     gap: 14px;
   }
 
