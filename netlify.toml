@@ -1,0 +1,9 @@
+[build]
+  # Skip the build when a push only touched backend/, which deploys separately
+  # to Cloudflare and never affects the site output. Netlify treats exit 0 as
+  # "skip", so this skips only when nothing outside backend/ changed; any other
+  # change makes git diff exit non-zero and the build goes ahead.
+  #
+  # Build command and publish directory are deliberately left out so the
+  # existing settings in the Netlify UI keep applying.
+  ignore = "git diff --quiet $CACHED_COMMIT_REF $COMMIT_REF -- . ':(exclude)backend'"
