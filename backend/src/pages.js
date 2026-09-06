@@ -96,16 +96,17 @@ export function deniedPage() {
 export function projectsPage() {
   const rows = projects.map((project) => {
     const links = [
+      project.site && `<a href="${project.site}">Site</a>`,
       project.github && `<a href="${project.github}">GitHub</a>`,
-      project.frontend && `<a href="${project.frontend}">Frontend</a>`,
-      project.backend && `<a href="${project.backend}">Backend</a>`,
+      project.frontend && `<a href="${project.frontend}">Frontend host</a>`,
+      project.backend && `<a href="${project.backend}">Backend host</a>`,
       project.docs && `<a href="${project.docs}">Docs</a>`
     ].filter(Boolean).join("");
 
     return `<li>
       <div class="name">${escapeHtml(project.name)}</div>
       <div class="links">${links || '<span class="muted">no links</span>'}</div>
-      <div class="tech">${escapeHtml(project.tech.join(" · "))}</div>
+      ${project.tech.length ? `<div class="tech">${escapeHtml(project.tech.join(" · "))}</div>` : ""}
     </li>`;
   }).join("");
 
