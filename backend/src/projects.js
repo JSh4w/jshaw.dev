@@ -29,8 +29,8 @@ export const projects = [
   },
   {
     name: "Automated Financial Analysis Tool",
-    site: null,
-    frontend: null,
+    site: "https://lucrum-stack.vercel.app",
+    frontend: "https://vercel.com/jsh4ws-projects/lucrum-stack",
     backend: null,
     github: "https://github.com/JSh4w/financial_analyzer",
     docs: "https://jsh4w.dev/projects/Financial-Platform/",
