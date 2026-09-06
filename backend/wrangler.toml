@@ -22,6 +22,9 @@ ACCESS_TEAM_DOMAIN = "curly-wind-fe5d.cloudflareaccess.com"
 ACCESS_AUD = "12b135b12b06dd58ff1924266b6c4bf3d30aa5df0a778b6e427e564a4570d6ff"
 # Vercel account slug, used to build dashboard links.
 VERCEL_SLUG = "jsh4ws-projects"
+# Belt and braces on top of the Access policy: only these addresses get in.
+# Comma-separated; leave empty to trust the Access policy alone.
+ALLOWED_EMAILS = "jontyshaw@btinternet.com,jshaw0012@gmail.com"
 
 # No secrets are needed yet. Cloudflare Access handles logging in, and the
 # calendar source has not been chosen. Set any future ones with:

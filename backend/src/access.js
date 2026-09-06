@@ -68,7 +68,16 @@ export async function getIdentity(request, env) {
     const audiences = Array.isArray(payload.aud) ? payload.aud : [payload.aud];
     if (!audiences.includes(env.ACCESS_AUD)) return null;
 
-    return { email: payload.email || null };
+    // Second gate. Access already applied its policy, but a policy edited by
+    // mistake should not silently open this up, so the Worker keeps its own
+    // allowlist when one is configured.
+    const email = payload.email || null;
+    if (env.ALLOWED_EMAILS) {
+      const allowed = env.ALLOWED_EMAILS.split(",").map((entry) => entry.trim().toLowerCase());
+      if (!email || !allowed.includes(email.toLowerCase())) return null;
+    }
+
+    return { email };
   } catch {
     return null;
   }

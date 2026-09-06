@@ -100,11 +100,11 @@ export function deniedPage() {
 export function projectsPage() {
   const rows = projects.map((project) => {
     const links = [
-      project.site && `<a href="${project.site}">Site</a>`,
-      project.github && `<a href="${project.github}">GitHub</a>`,
-      project.frontend && `<a href="${project.frontend}">Frontend host</a>`,
-      project.backend && `<a href="${project.backend}">Backend host</a>`,
-      project.docs && `<a href="${project.docs}">Docs</a>`
+      project.site && `<a href="${attr(project.site)}">Site</a>`,
+      project.github && `<a href="${attr(project.github)}">GitHub</a>`,
+      project.frontend && `<a href="${attr(project.frontend)}">Frontend host</a>`,
+      project.backend && `<a href="${attr(project.backend)}">Backend host</a>`,
+      project.docs && `<a href="${attr(project.docs)}">Docs</a>`
     ].filter(Boolean).join("");
 
     return `<li>
@@ -149,9 +149,9 @@ function hostingSection(title, rows, error, secret, tokenUrl, meta) {
     body = `<ul class="rows">${rows.map((row) => `<li>
       <div class="name">${escapeHtml(row.name)}</div>
       <div class="links">
-        ${row.url ? `<a href="${row.url}">Live</a>` : ""}
-        <a href="${row.admin}">Dashboard</a>
-        ${row.repo ? `<a href="${row.repo}">Repo</a>` : ""}
+        ${row.url ? `<a href="${attr(row.url)}">Live</a>` : ""}
+        ${row.admin ? `<a href="${attr(row.admin)}">Dashboard</a>` : ""}
+        ${row.repo ? `<a href="${attr(row.repo)}">Repo</a>` : ""}
       </div>
       <div class="tech">${escapeHtml(meta(row))}</div>
     </li>`).join("")}</ul>`;
@@ -179,6 +179,13 @@ export function calendarPage() {
     <p class="muted">Not connected. The Apple calendar source still needs
     choosing: a published ICS feed, or CalDAV with an app-specific password.</p>
   `);
+}
+
+// Only http(s) URLs are emitted, so a javascript: or data: value coming back
+// from a provider API cannot become a link.
+function attr(value) {
+  const url = String(value);
+  return /^https?:\/\//i.test(url) ? escapeHtml(url) : "";
 }
 
 function escapeHtml(value) {
