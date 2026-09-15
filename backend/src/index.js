@@ -3,6 +3,8 @@ import { page, projectsPage, hostingPage, todoPage, calendarPage } from "./pages
 import { listSites } from "./netlify.js";
 import { listServices } from "./render.js";
 import { listProjects } from "./vercel.js";
+import { listCloudflare } from "./cloudflare.js";
+import { listSupabase } from "./supabase.js";
 
 export default {
   async fetch(request, env) {
@@ -23,22 +25,11 @@ export default {
       case "/projects":
         return projectsPage();
 
-      // Both providers are fetched together; one failing does not hide the other.
-      case "/hosting": {
-        const [netlify, render, vercel] = await Promise.allSettled([
-          listSites(env), listServices(env), listProjects(env)
-        ]);
-        return hostingPage({
-          netlify: netlify.status === "fulfilled" ? netlify.value : null,
-          render: render.status === "fulfilled" ? render.value : null,
-          vercel: vercel.status === "fulfilled" ? vercel.value : null,
-          errors: {
-            netlify: netlify.status === "rejected" ? netlify.reason.message : null,
-            render: render.status === "rejected" ? render.reason.message : null,
-            vercel: vercel.status === "rejected" ? vercel.reason.message : null
-          }
-        });
-      }
+      // All providers are fetched together, in the order pages.js lists them.
+      case "/hosting":
+        return hostingPage(await Promise.allSettled([
+          listSites(env), listServices(env), listProjects(env), listCloudflare(env), listSupabase(env)
+        ]));
 
       case "/todo":
         return todoPage();

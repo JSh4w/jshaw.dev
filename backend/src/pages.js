@@ -159,21 +159,30 @@ export function projectsPage() {
     `<h1>Projects</h1>${searchBox("Filter projects")}<ul class="rows">${rows}</ul>`);
 }
 
-export function hostingPage({ netlify, render, vercel, errors }) {
-  const sections = [
-    hostingSection("Netlify", netlify, errors.netlify, "NETLIFY_TOKEN",
-      "https://app.netlify.com/user/applications", (site) => site.published
-        ? "published " + formatDate(site.published) : "never published"),
-    hostingSection("Render", render, errors.render, "RENDER_TOKEN",
-      "https://dashboard.render.com/u/settings#api-keys", (service) =>
-        [service.runtime, service.region,
-         service.updated && "updated " + formatDate(service.updated)]
-          .filter(Boolean).join(" \u00b7 ")),
-    hostingSection("Vercel", vercel, errors.vercel, "VERCEL_TOKEN",
-      "https://vercel.com/account/tokens", (project) =>
-        [project.runtime, project.updated && "deployed " + formatDate(project.updated)]
-          .filter(Boolean).join(" \u00b7 ") || "no production deployment")
-  ].join("");
+// One entry per provider, in the order index.js fetches them: the heading, the
+// secret it needs, where to create that token, and the detail on each row.
+const detail = (...parts) => parts.filter(Boolean).join(" \u00b7 ");
+const PROVIDERS = [
+  ["Netlify", "NETLIFY_TOKEN", "https://app.netlify.com/user/applications",
+    (site) => site.published ? "published " + formatDate(site.published) : "never published"],
+  ["Render", "RENDER_TOKEN", "https://dashboard.render.com/u/settings#api-keys",
+    (row) => detail(row.runtime, row.region, row.updated && "updated " + formatDate(row.updated))],
+  ["Vercel", "VERCEL_TOKEN", "https://vercel.com/account/tokens",
+    (row) => detail(row.runtime, row.updated && "deployed " + formatDate(row.updated)) || "no production deployment"],
+  ["Cloudflare", "CLOUDFLARE_API_TOKEN", "https://dash.cloudflare.com/profile/api-tokens",
+    (row) => detail(row.runtime, row.updated && "updated " + formatDate(row.updated))],
+  ["Supabase", "SUPABASE_TOKEN", "https://supabase.com/dashboard/account/tokens",
+    (row) => detail(row.runtime, row.updated && "created " + formatDate(row.updated))]
+];
+
+// Takes Promise.allSettled results, one per provider, so one failing does not
+// hide the others.
+export function hostingPage(results) {
+  const sections = PROVIDERS.map(([title, secret, tokenUrl, meta], i) => {
+    const { status, value, reason } = results[i];
+    return hostingSection(title, status === "fulfilled" ? value : null,
+      status === "rejected" ? reason.message : null, secret, tokenUrl, meta);
+  }).join("");
 
   return page("Hosting", "/hosting",
     `<h1>Hosting</h1>${searchBox("Filter deployments")}${sections}`);

@@ -25,12 +25,14 @@ code is written against web APIs (`fetch`, `crypto.subtle`).
 - `src/netlify.js` — calls the Netlify API for the Hosting tab.
 - `src/render.js` — calls the Render API for the same tab.
 - `src/vercel.js` — calls the Vercel API for the same tab.
+- `src/cloudflare.js` — lists Cloudflare Workers and Pages projects for the same tab.
+- `src/supabase.js` — calls the Supabase Management API for the same tab.
 
 ### Routes
 | Path | Purpose |
 | --- | --- |
 | `/projects` | Links for each project: GitHub, deployments, docs, key tech. |
-| `/hosting` | Netlify, Render and Vercel deployments, read live from their APIs. |
+| `/hosting` | Netlify, Render, Vercel, Cloudflare and Supabase projects, read live from their APIs. |
 | `/todo` | Placeholder until the list is stored in D1. |
 | `/calendar` | Placeholder until the calendar source is chosen. |
 | `/login` | Sends you to GitHub to sign in. |
