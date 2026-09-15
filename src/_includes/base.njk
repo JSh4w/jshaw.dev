@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% if title and title != "Home" %}{{ title }} — {% endif %}Jonathan Shaw</title>
+    <title>{% if title %}{{ title }} — {% endif %}Jonathan Shaw</title>
     <link rel="icon" href="/assets/headshot.png">
     <link rel="stylesheet" href="/styles/index.css">
 </head>
 <body>
-    <header class="site-header">
+    <header>
         <div class="page">
             <a href="/" class="logo">JS</a>
-            <nav class="site-nav">
+            <nav>
                 <a href="/#work" class="label">Work</a>
                 <a href="https://medium.com/@jshaw0012" target="_blank" class="label">Blog</a>
                 <a href="/assets/Curriculum_Vitae_Jonathan_Shaw_2025.pdf" target="_blank" class="label">Resume</a>
@@ -24,6 +24,6 @@
         {{ content | safe }}
     </main>
 
-    <footer class="site-footer"></footer>
+    <footer></footer>
 </body>
 </html>

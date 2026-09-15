@@ -5,17 +5,11 @@ layout: base.njk
 <article class="page project-detail">
   <h1>{{ title }}</h1>
 
-  {% if image %}
-  <img src="{{ image }}" alt="{{ title }}" class="project-detail-image">
-  {% endif %}
+  {% if image %}<img src="{{ image }}" alt="{{ title }}">{% endif %}
 
-  <div class="project-links">
-    {% if link %}
-    <a href="{{ link }}" target="_blank" class="label is-live">Live</a>
-    {% endif %}
-    {% if github %}
-    <a href="{{ github }}" target="_blank" class="label">Source</a>
-    {% endif %}
+  <div class="links">
+    {% if link %}<a href="{{ link }}" target="_blank" class="label">Live</a>{% endif %}
+    {% if github %}<a href="{{ github }}" target="_blank" class="label">Source</a>{% endif %}
   </div>
 
   <div class="prose">

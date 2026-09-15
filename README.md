@@ -9,7 +9,7 @@ Now hosted on: https://jsh4w.dev
 
 ### Structure
 - `.eleventy.js` — Eleventy config. Sets `src/` as input and `_site/` as output, copies `assets/` and `styles/` through untouched, and builds the `projects` collection (sorted by each page's `order`).
-- `src/index.md` — the home page.
+- `src/index.njk` — the home page.
 - `src/projects/*.md` — one Markdown file per project; front matter sets the title, layout and `order`.
 - `src/_includes/` — Nunjucks layouts. `base.njk` is the page shell, `project.njk` the project page template.
 - `styles/` — CSS and web fonts, copied as-is.
