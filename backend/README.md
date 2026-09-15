@@ -6,8 +6,8 @@ served from a subdomain (`app.jsh4w.dev`).
 
 ### Tools
 - **Cloudflare Workers** — runs the backend code at the edge. No server to manage.
-- **GitHub OAuth** — does the logging in. Only usernames listed in
-  `ALLOWED_GITHUB_USERS` get in; the Worker then issues a signed session cookie.
+- **GitHub OAuth** — does the logging in. Only the account whose id is
+  `GITHUB_USER_ID` gets in; the Worker then issues a signed session cookie.
 - **D1** — Cloudflare's managed SQLite database.
 - **Wrangler** — Cloudflare's CLI. Runs the local dev server, applies migrations, deploys.
 
@@ -15,7 +15,7 @@ Workers is not Node. Native modules and long-running processes are unavailable;
 code is written against web APIs (`fetch`, `crypto.subtle`).
 
 ### Structure
-- `wrangler.toml` — config: the D1 binding, the allowlist, the custom domain.
+- `wrangler.toml` — config: the D1 binding, the allowed GitHub id, the custom domain.
 - `migrations/0001_init.sql` — the schema. Just `oauth_tokens`.
 - `src/index.js` — the router. Every route except the login ones needs a session.
 - `src/auth.js` — the GitHub login flow and the signed session cookie.
@@ -75,10 +75,9 @@ Uncomment the `[[routes]]` block in `wrangler.toml` once `app.jsh4w.dev` exists
 in Cloudflare DNS. Until then it deploys to a `workers.dev` subdomain.
 
 ### Notes
-- The GitHub token is used once to read your username, then discarded. The app
-  asks for no scopes, so it can only see public profile information.
-- The session lasts a week. The allowlist is rechecked on every request, so
-  removing a username locks it out at once; changing `SESSION_SECRET` signs
-  everyone out.
-- The allowlist matches usernames. If you rename your GitHub account, update
-  `ALLOWED_GITHUB_USERS`, because someone else could claim the old name.
+- The GitHub token is used once to read your account id, then discarded. The
+  app asks for no scopes, so it can only see public profile information.
+- It matches the numeric account id, not the username: renaming the account
+  keeps you in, and nobody who later takes the old name can get in.
+- The session lasts a week. The id is rechecked on every request, and changing
+  `SESSION_SECRET` signs everyone out.

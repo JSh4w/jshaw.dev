@@ -13,7 +13,7 @@ export default {
     if (path === "/auth/github/callback") return callback(request, env);
     if (path === "/logout") return logout(env);
 
-    // Everything else needs a signed-in, allowlisted GitHub user.
+    // Everything else needs the owner's GitHub account to be signed in.
     if (!(await getUser(request, env))) {
       return Response.redirect(new URL("/login", request.url).href, 302);
     }

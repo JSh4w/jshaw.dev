@@ -1,6 +1,7 @@
-// Logging in with GitHub. GitHub confirms who the visitor is; the Worker checks
-// the username against ALLOWED_GITHUB_USERS and issues its own session cookie.
-// There is no sessions table: the cookie holds the username and an expiry,
+// Logging in with GitHub. GitHub confirms who the visitor is; the Worker only
+// lets in the one account whose numeric id is GITHUB_USER_ID, then issues its
+// own session cookie. The id, unlike the username, never changes or gets reused.
+// There is no sessions table: the cookie holds the id and an expiry,
 // HMAC-signed with SESSION_SECRET, so it cannot be forged or extended.
 
 import { deniedPage } from "./pages.js";
@@ -19,8 +20,7 @@ function hmacKey(env) {
   );
 }
 
-const isAllowed = (env, user) => (env.ALLOWED_GITHUB_USERS || "").split(",")
-  .some((entry) => entry.trim().toLowerCase() === user.toLowerCase());
+const isOwner = (env, id) => Boolean(env.GITHUB_USER_ID) && String(id) === env.GITHUB_USER_ID;
 
 function readCookie(request, name) {
   const match = (request.headers.get("Cookie") || "").match(new RegExp(`(?:^|;\\s*)${name}=([^;]*)`));
@@ -36,16 +36,15 @@ function redirect(location, cookies) {
   return new Response(null, { status: 302, headers });
 }
 
-// Returns the GitHub username for a valid, unexpired session, or null.
+// Returns the GitHub user id for a valid, unexpired session, or null.
 export async function getUser(request, env) {
-  const [user, expires, signature] = (readCookie(request, "session") || "").split(".");
+  const [id, expires, signature] = (readCookie(request, "session") || "").split(".");
   if (!signature || !(Number(expires) > Date.now() / 1000)) return null;
 
   const valid = await crypto.subtle.verify(
-    "HMAC", await hmacKey(env), fromHex(signature), encoder.encode(`${user}.${expires}`)
+    "HMAC", await hmacKey(env), fromHex(signature), encoder.encode(`${id}.${expires}`)
   );
-  // Rechecked on every request, so removing a name locks it out immediately.
-  return valid && isAllowed(env, user) ? user : null;
+  return valid && isOwner(env, id) ? id : null;
 }
 
 // Sends the visitor to GitHub. The random state, echoed back in the callback
@@ -88,13 +87,13 @@ export async function callback(request, env) {
   });
   if (!userResponse.ok) return new Response("GitHub login failed.", { status: 400 });
 
-  const { login: user } = await userResponse.json();
-  if (!isAllowed(env, user)) return deniedPage();
+  const { id } = await userResponse.json();
+  if (!isOwner(env, id)) return deniedPage();
 
   const expires = Math.floor(Date.now() / 1000) + WEEK;
-  const signature = await crypto.subtle.sign("HMAC", await hmacKey(env), encoder.encode(`${user}.${expires}`));
+  const signature = await crypto.subtle.sign("HMAC", await hmacKey(env), encoder.encode(`${id}.${expires}`));
   return redirect("/", [
-    cookie("session", `${user}.${expires}.${toHex(signature)}`, WEEK),
+    cookie("session", `${id}.${expires}.${toHex(signature)}`, WEEK),
     cookie("oauth_state", "", 0)
   ]);
 }
