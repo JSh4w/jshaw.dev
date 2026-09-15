@@ -16,16 +16,11 @@ database_id = "1d8f16f3-9c3d-423c-b0ca-d9550b9e0559"
 
 [vars]
 SITE_URL = "https://jsh4w.dev"
-# Zero Trust team domain, e.g. "jsh4w.cloudflareaccess.com"
-ACCESS_TEAM_DOMAIN = "curly-wind-fe5d.cloudflareaccess.com"
-# The Access application's Audience (AUD) tag, from its Overview tab.
-ACCESS_AUD = "12b135b12b06dd58ff1924266b6c4bf3d30aa5df0a778b6e427e564a4570d6ff"
 # Vercel account slug, used to build dashboard links.
 VERCEL_SLUG = "jsh4ws-projects"
-# Belt and braces on top of the Access policy: only these addresses get in.
-# Comma-separated; leave empty to trust the Access policy alone.
-ALLOWED_EMAILS = "jontyshaw@btinternet.com,jshaw0012@gmail.com"
+# GitHub usernames allowed to log in. Comma-separated; empty lets nobody in.
+ALLOWED_GITHUB_USERS = "JSh4w"
 
-# No secrets are needed yet. Cloudflare Access handles logging in, and the
-# calendar source has not been chosen. Set any future ones with:
-#   npx wrangler secret put <NAME>
+# Secrets, set with `npx wrangler secret put <NAME>`:
+#   GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET  from the GitHub OAuth app
+#   SESSION_SECRET                          any long random string

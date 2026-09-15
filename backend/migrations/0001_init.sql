@@ -2,8 +2,7 @@
 -- The refresh token is the durable secret; the access token is short-lived and
 -- replaced by the scheduled refresh.
 --
--- There is no sessions table: Cloudflare Access handles logging in, so this
--- Worker never issues a session of its own.
+-- There is no sessions table: the login session lives in a signed cookie.
 CREATE TABLE IF NOT EXISTS oauth_tokens (
   provider       TEXT PRIMARY KEY,
   access_token   TEXT,

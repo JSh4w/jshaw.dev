@@ -1,5 +1,5 @@
-import { getIdentity } from "./access.js";
-import { page, projectsPage, hostingPage, todoPage, calendarPage, deniedPage } from "./pages.js";
+import { getUser, login, callback, logout } from "./auth.js";
+import { page, projectsPage, hostingPage, todoPage, calendarPage } from "./pages.js";
 import { listSites } from "./netlify.js";
 import { listServices } from "./render.js";
 import { listProjects } from "./vercel.js";
@@ -8,9 +8,15 @@ export default {
   async fetch(request, env) {
     const path = new URL(request.url).pathname.replace(/\/+$/, "") || "/";
 
-    // Cloudflare Access gates every route. If the token is missing or invalid
-    // the request never should have got here, so this is a hard stop.
-    if (!(await getIdentity(request, env))) return deniedPage();
+    // The login routes are the only ones open to anyone.
+    if (path === "/login") return login(request, env);
+    if (path === "/auth/github/callback") return callback(request, env);
+    if (path === "/logout") return logout(env);
+
+    // Everything else needs a signed-in, allowlisted GitHub user.
+    if (!(await getUser(request, env))) {
+      return Response.redirect(new URL("/login", request.url).href, 302);
+    }
 
     switch (path) {
       case "/":
@@ -39,13 +45,6 @@ export default {
 
       case "/calendar":
         return calendarPage();
-
-      // Ends the Access session, not an app session.
-      case "/logout":
-        return new Response(null, {
-          status: 302,
-          headers: { Location: `https://${env.ACCESS_TEAM_DOMAIN}/cdn-cgi/access/logout` }
-        });
 
       default:
         return page("Not found", null, "<h1>Not found</h1>", 404);
