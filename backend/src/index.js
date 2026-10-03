@@ -1,10 +1,21 @@
 import { getUser, login, callback, logout } from "./auth.js";
-import { page, projectsPage, hostingPage, todoPage, calendarPage } from "./pages.js";
+import { page, projectsPage, hostingPage, hostingSection, azurePage, azureSection, todoPage, calendarPage } from "./pages.js";
 import { listSites } from "./netlify.js";
 import { listServices } from "./render.js";
 import { listProjects } from "./vercel.js";
 import { listCloudflare } from "./cloudflare.js";
 import { listSupabase } from "./supabase.js";
+import { listAzure, listAzureProjects } from "./azure.js";
+
+// Hosting providers, keyed as in pages.js. Each loads from /hosting/<key>.
+const HOSTING = {
+  netlify: listSites,
+  render: listServices,
+  vercel: listProjects,
+  cloudflare: listCloudflare,
+  supabase: listSupabase,
+  azure: listAzure
+};
 
 export default {
   async fetch(request, env) {
@@ -20,16 +31,24 @@ export default {
       return Response.redirect(new URL("/login", request.url).href, 302);
     }
 
+    const provider = path.match(/^\/hosting\/([a-z]+)$/)?.[1];
+    if (provider && Object.hasOwn(HOSTING, provider)) {
+      return hostingSection(provider, HOSTING[provider](env));
+    }
+
     switch (path) {
       case "/":
       case "/projects":
         return projectsPage();
 
-      // All providers are fetched together, in the order pages.js lists them.
       case "/hosting":
-        return hostingPage(await Promise.allSettled([
-          listSites(env), listServices(env), listProjects(env), listCloudflare(env), listSupabase(env)
-        ]));
+        return hostingPage();
+
+      case "/azure":
+        return azurePage();
+
+      case "/azure/projects":
+        return azureSection(listAzureProjects(env));
 
       case "/todo":
         return todoPage();

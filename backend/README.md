@@ -27,12 +27,18 @@ code is written against web APIs (`fetch`, `crypto.subtle`).
 - `src/vercel.js` — calls the Vercel API for the same tab.
 - `src/cloudflare.js` — lists Cloudflare Workers and Pages projects for the same tab.
 - `src/supabase.js` — calls the Supabase Management API for the same tab.
+- `src/azure.js` — lists App Service, Functions, Static Web Apps and Container
+  Apps through Azure Resource Graph, for the same tab, and the spend per resource
+  group from Cost Management for the Azure tab. Setup steps are in the file.
 
 ### Routes
 | Path | Purpose |
 | --- | --- |
 | `/projects` | Links for each project: GitHub, deployments, docs, key tech. |
-| `/hosting` | Netlify, Render, Vercel, Cloudflare and Supabase projects, read live from their APIs. |
+| `/hosting` | Netlify, Render, Vercel, Cloudflare, Supabase and Azure projects. The page shows at once; each section then loads on its own. |
+| `/hosting/<provider>` | One provider's rows, read live from its API. Cached in the browser for a minute. |
+| `/azure` | Azure spend this month and last, and each resource group with its resource count and cost. |
+| `/azure/projects` | The rows for that page, read live from Azure. Cached in the browser for ten minutes. |
 | `/todo` | Placeholder until the list is stored in D1. |
 | `/calendar` | Placeholder until the calendar source is chosen. |
 | `/login` | Sends you to GitHub to sign in. |

@@ -6,6 +6,7 @@ import { projects } from "./projects.js";
 const NAV = [
   { href: "/projects", label: "Projects" },
   { href: "/hosting", label: "Hosting" },
+  { href: "/azure", label: "Azure" },
   { href: "/todo", label: "To-do" },
   { href: "/calendar", label: "Calendar" }
 ];
@@ -110,18 +111,22 @@ function layout(title, current, body) {
 <nav>${nav}<a class="foot" href="/logout">Sign out</a></nav>
 <main>${body}</main>
 <script>
-  // Filters rows in place. The only script on the page; without it the search
-  // box does nothing and every row stays visible.
+  // Filters rows in place, and fills each [data-src] block from its URL once
+  // the page is showing. The only script on the page.
   var box = document.querySelector("input[type=search]");
-  if (box) {
-    var rows = Array.prototype.slice.call(document.querySelectorAll("ul.rows > li"));
-    box.addEventListener("input", function () {
-      var term = box.value.trim().toLowerCase();
-      rows.forEach(function (row) {
-        row.hidden = term !== "" && row.textContent.toLowerCase().indexOf(term) === -1;
-      });
+  function filter() {
+    var term = box ? box.value.trim().toLowerCase() : "";
+    document.querySelectorAll("ul.rows > li").forEach(function (row) {
+      row.hidden = term !== "" && row.textContent.toLowerCase().indexOf(term) === -1;
     });
   }
+  if (box) box.addEventListener("input", filter);
+  document.querySelectorAll("[data-src]").forEach(function (block) {
+    fetch(block.dataset.src)
+      .then(function (response) { if (!response.ok) throw new Error(); return response.text(); })
+      .then(function (html) { block.innerHTML = html; filter(); })
+      .catch(function () { block.innerHTML = '<p class="muted">Could not load. Refresh to try again.</p>'; });
+  });
 </script>
 </body>
 </html>`;
@@ -159,57 +164,117 @@ export function projectsPage() {
     `<h1>Projects</h1>${searchBox("Filter projects")}<ul class="rows">${rows}</ul>`);
 }
 
-// One entry per provider, in the order index.js fetches them: the heading, the
-// secret it needs, where to create that token, and the detail on each row.
+// One entry per provider, keyed as in index.js and the /hosting/<key> route:
+// the secrets it needs, where to create them, and the detail on each row.
 const detail = (...parts) => parts.filter(Boolean).join(" \u00b7 ");
-const PROVIDERS = [
-  ["Netlify", "NETLIFY_TOKEN", "https://app.netlify.com/user/applications",
+const PROVIDERS = {
+  netlify: [["NETLIFY_TOKEN"], "https://app.netlify.com/user/applications",
     (site) => site.published ? "published " + formatDate(site.published) : "never published"],
-  ["Render", "RENDER_TOKEN", "https://dashboard.render.com/u/settings#api-keys",
+  render: [["RENDER_TOKEN"], "https://dashboard.render.com/u/settings#api-keys",
     (row) => detail(row.runtime, row.region, row.updated && "updated " + formatDate(row.updated))],
-  ["Vercel", "VERCEL_TOKEN", "https://vercel.com/account/tokens",
+  vercel: [["VERCEL_TOKEN"], "https://vercel.com/account/tokens",
     (row) => detail(row.runtime, row.updated && "deployed " + formatDate(row.updated)) || "no production deployment"],
-  ["Cloudflare", "CLOUDFLARE_API_TOKEN", "https://dash.cloudflare.com/profile/api-tokens",
+  cloudflare: [["CLOUDFLARE_API_TOKEN"], "https://dash.cloudflare.com/profile/api-tokens",
     (row) => detail(row.runtime, row.updated && "updated " + formatDate(row.updated))],
-  ["Supabase", "SUPABASE_TOKEN", "https://supabase.com/dashboard/account/tokens",
-    (row) => detail(row.runtime, row.updated && "created " + formatDate(row.updated))]
-];
+  supabase: [["SUPABASE_TOKEN"], "https://supabase.com/dashboard/account/tokens",
+    (row) => detail(row.runtime, row.updated && "created " + formatDate(row.updated))],
+  azure: [["AZURE_TENANT_ID", "AZURE_CLIENT_ID", "AZURE_CLIENT_SECRET"], "https://portal.azure.com/",
+    (row) => detail(row.runtime, row.updated && "updated " + formatDate(row.updated))]
+};
 
-// Takes Promise.allSettled results, one per provider, so one failing does not
-// hide the others.
-export function hostingPage(results) {
-  const sections = PROVIDERS.map(([title, secret, tokenUrl, meta], i) => {
-    const { status, value, reason } = results[i];
-    return hostingSection(title, status === "fulfilled" ? value : null,
-      status === "rejected" ? reason.message : null, secret, tokenUrl, meta);
-  }).join("");
+// The page shows at once with a placeholder per provider; the script then
+// loads each from /hosting/<key>, so a slow API only holds up its own section.
+export function hostingPage() {
+  const sections = Object.keys(PROVIDERS).map((key) =>
+    `<h2>${key[0].toUpperCase() + key.slice(1)}</h2>
+    <div data-src="/hosting/${key}"><p class="muted">Loading\u2026</p></div>`
+  ).join("");
 
   return page("Hosting", "/hosting",
     `<h1>Hosting</h1>${searchBox("Filter deployments")}${sections}`);
 }
 
-// One provider's block: a heading, then either its rows or why there are none.
-function hostingSection(title, rows, error, secret, tokenUrl, meta) {
+// One provider's rows, or why there are none. Cached in the browser for a
+// minute, so flicking back to the tab does not call every API again.
+export async function hostingSection(key, list) {
+  const [secrets, tokenUrl, meta] = PROVIDERS[key];
   let body;
-  if (error) {
-    body = `<p class="muted">${escapeHtml(error)}</p>`;
-  } else if (rows === null) {
-    body = `<p class="muted">No token set. Create one at
-      <a href="${tokenUrl}">${escapeHtml(new URL(tokenUrl).hostname)}</a>,
-      then run <code>npx wrangler secret put ${secret}</code>.</p>`;
-  } else {
-    body = `<ul class="rows">${rows.map((row) => `<li>
-      <span class="name">${escapeHtml(row.name)}</span>
-      <span class="links">
-        ${row.url ? ext(row.url, "Live") : ""}
-        ${row.admin ? ext(row.admin, "Dashboard") : ""}
-        ${row.repo ? ext(row.repo, "Repo") : ""}
-      </span>
-      <span class="tech">${escapeHtml(meta(row))}</span>
-    </li>`).join("")}</ul>`;
+  try {
+    const rows = await list;
+    body = rows === null
+      ? `<p class="muted">Not connected. Create a token at
+        <a href="${tokenUrl}">${escapeHtml(new URL(tokenUrl).hostname)}</a>, then run
+        ${secrets.map((name) => `<code>npx wrangler secret put ${name}</code>`).join(", ")}.</p>`
+      : `<ul class="rows">${rows.map((row) => `<li>
+        <span class="name">${escapeHtml(row.name)}</span>
+        <span class="links">
+          ${row.url ? ext(row.url, "Live") : ""}
+          ${row.admin ? ext(row.admin, "Dashboard") : ""}
+          ${row.repo ? ext(row.repo, "Repo") : ""}
+        </span>
+        <span class="tech">${escapeHtml(meta(row))}</span>
+      </li>`).join("")}</ul>`;
+  } catch (error) {
+    body = `<p class="muted">${escapeHtml(error.message)}</p>`;
   }
 
-  return `<h2>${title}</h2>${body}`;
+  return new Response(body, {
+    headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, max-age=60" }
+  });
+}
+
+// Azure spending, one row per resource group. Loaded like a hosting section,
+// and cached for ten minutes because Cost Management rate-limits hard.
+export function azurePage() {
+  return page("Azure", "/azure", `<h1>Azure</h1>${searchBox("Filter resource groups")}
+    <div data-src="/azure/projects"><p class="muted">Loading\u2026</p></div>`);
+}
+
+export async function azureSection(list) {
+  let body;
+  try {
+    const rows = await list;
+    if (rows === null) {
+      body = `<p class="muted">Not connected. See the top of <code>src/azure.js</code> to create a
+        service principal, then run ${PROVIDERS.azure[0].map((name) =>
+          `<code>npx wrangler secret put ${name}</code>`).join(", ")}.</p>`;
+    } else {
+      const total = (field) => Object.entries(rows.reduce((sums, row) => {
+        if (row[field]) sums[row[field].currency] = (sums[row[field].currency] || 0) + row[field].cost;
+        return sums;
+      }, {})).map(([currency, cost]) => money({ cost, currency })).join(" + ") || money(null);
+
+      body = `<h2>Spending</h2>
+        <p><span class="name">${total("month")}</span> this month so far
+        <span class="muted">\u00b7 ${total("last")} last month \u00b7 can lag by up to a day</span></p>
+        <h2>Resource groups</h2>
+        <ul class="rows">${rows.map((row) => `<li>
+          <span class="name">${escapeHtml(row.name)}</span>
+          <span class="links">
+            ${row.admin ? ext(row.admin, "Portal") : '<span class="muted">deleted</span>'}
+            ${row.costs ? ext(row.costs, "Cost analysis") : ""}
+          </span>
+          <span class="tech">${escapeHtml(detail(
+            money(row.month) + " this month",
+            money(row.last) + " last month",
+            row.resources + (row.resources === 1 ? " resource" : " resources"),
+            row.subscription
+          ))}</span>
+        </li>`).join("")}</ul>`;
+    }
+  } catch (error) {
+    body = `<p class="muted">${escapeHtml(error.message)}</p>`;
+  }
+
+  return new Response(body, {
+    headers: { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "private, max-age=600" }
+  });
+}
+
+function money(amount) {
+  if (!amount) return "\u2013";
+  return new Intl.NumberFormat("en-GB", { style: "currency", currency: amount.currency || "GBP" })
+    .format(amount.cost);
 }
 
 function searchBox(placeholder) {
