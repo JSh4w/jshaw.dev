@@ -83,12 +83,14 @@ const GROUPS = `resourcecontainers
 | project subscriptionId, name, resources = coalesce(resources, 0)`;
 
 // Cost per resource group for one subscription over one timeframe, as a map
-// from lowercased group name to { cost, currency }.
-async function costs(token, subscriptionId, timeframe) {
+// from lowercased group name to { cost, currency }. A "Custom" timeframe takes
+// a timePeriod, since the query API rejects timeframes like TheLastMonth.
+async function costs(token, subscriptionId, timeframe, timePeriod) {
   const { properties } = await arm(token,
     `/subscriptions/${subscriptionId}/providers/Microsoft.CostManagement/query?api-version=2023-11-01`, {
       type: "ActualCost",
       timeframe,
+      ...(timePeriod && { timePeriod }),
       dataset: {
         granularity: "None",
         aggregation: { cost: { name: "Cost", function: "Sum" } },
@@ -113,11 +115,18 @@ export async function listAzureProjects(env) {
     graph(token, GROUPS)
   ]);
 
+  // Last month in UTC, from its first day to its last.
+  const now = new Date();
+  const lastMonth = {
+    from: new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth() - 1, 1)).toISOString(),
+    to: new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), 0, 23, 59, 59)).toISOString()
+  };
+
   const rows = [];
   for (const { subscriptionId, displayName } of subscriptions) {
     const [month, last] = await Promise.all([
       costs(token, subscriptionId, "MonthToDate"),
-      costs(token, subscriptionId, "TheLastMonth")
+      costs(token, subscriptionId, "Custom", lastMonth)
     ]);
     const named = new Map(groups.filter((g) => g.subscriptionId === subscriptionId)
       .map((g) => [g.name.toLowerCase(), g]));
